@@ -15,7 +15,7 @@ const Search = () => {
 };
 
 const Container = styled.div`
-  display: flex;
+    
 `;
 
 export default Search;
