@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import {
-  IconApp, IconLogin, IconLogo, IconMenu, IconSetting,
+  IconApp, IconLogo, IconMenu, IconSetting,
 } from '../../../../icons';
 import SearchBoxContainer from '../../containers/SearchBoxContainer';
+import LoginButton from '../Button/LoginButton';
 
 const Header = ({ togglePopup }) => {
   const a = 1;
@@ -30,14 +31,7 @@ const Header = ({ togglePopup }) => {
           <ButtonSetting>
             <IconSetting />
           </ButtonSetting>
-          <ButtonLogin>
-            <div className="loginIcon">
-              <IconLogin />
-            </div>
-            <p>
-              로그인
-            </p>
-          </ButtonLogin>
+          <LoginButton />
         </ButtonGroup>
       </Right>
     </Container>
@@ -95,26 +89,7 @@ const ButtonSetting = styled.div`
   width: 40px;
   height: 40px;
   fill: #fff;
+  margin-right: 8px;
 `;
-const ButtonLogin = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 8px;
-  padding: 12px;
-  width: 95px;
-  height: 40px;
-  border: 1px solid #3ea6ff;
-  border-radius: 3px;
-  cursor: pointer;
-  .loginIcon{
-    width: 24px;
-    height: 24px;
-    fill: #3ea6ff;
-  }
-  p{
-    font-size: 14px;
-    color: #3ea6ff;
-  }
-`;
+
 export default Header;

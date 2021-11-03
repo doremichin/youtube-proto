@@ -7,29 +7,28 @@ import cn from 'classnames';
 
 import { Action } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
-import GridList from '../../shared/components/List/GridList';
+import SearchResults from '../components/SearchResults';
 
 const SearchContainer = () => {
   const { search } = useLocation();
   const { popup } = useSelector((state) => state.app);
+  const { items } = useSelector((state) => state.search);
   const dispatch = useDispatch();
-  const query = qs.parse(search, { ignoreQueryPrefix: true });
+  const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
   const getSearchResult = () => {
     dispatch(Action.Creators.getSearchResults({
       part: 'snippet',
-      q: query.search_query,
+      q: search_query,
       key: ACCESS_KEY,
     }));
   };
   useEffect(() => {
     getSearchResult();
-  }, [query]);
+  }, [search_query]);
   return (
     <Container className={cn({ popup })}>
-      <h1>
-        search container
-      </h1>
-      <GridList />
+
+      <SearchResults data={items} />
     </Container>
   );
 };
@@ -38,13 +37,9 @@ const Container = styled.div`
   position: absolute;
   top: 56px;
   left: 240px;
+  right: 0;
   &.popup{
     left: 72px;
-  }
-  max-width: 800px;
-  width: 100%;
-  h1{
-    color: #fff;
   }
 `;
 
