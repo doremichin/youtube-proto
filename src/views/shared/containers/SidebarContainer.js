@@ -7,10 +7,10 @@ import SidebarStatic from '../components/Sidebar/SidebarStatic';
 
 const SidebarContainer = () => {
   const a = 1;
-  const { popup } = useSelector((state) => state.app);
+  const { sidebar } = useSelector((state) => state.app);
   return (
     <Container>
-      <SidebarPopup view={popup} />
+      <SidebarPopup view={sidebar} />
       <SidebarStatic />
     </Container>
   );

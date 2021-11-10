@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SearchContainer from '../views/search/containers/SearchContainer';
+import VideoContainer from '../views/video/containers/VideoContainer';
 
-const Search = () => {
+const Video = () => {
   const a = 1;
   return (
     <Container>
-      <SearchContainer />
+      <VideoContainer />
     </Container>
   );
 };
 
 const Container = styled.div`
-    
+
 `;
 
-export default Search;
+export default Video;

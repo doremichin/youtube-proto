@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const SearchItem = ({ item }) => {
   const a = 1;
   return (
-    <Container>
+    <Container to={`/watch?v=${item.id.videoId}`}>
       <Thumb>
         <Image>
           <img src={item.snippet.thumbnails.medium.url} alt="" />
@@ -21,7 +22,7 @@ const SearchItem = ({ item }) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled(Link)`
   display: flex;
   align-items: center;
 `;
