@@ -5,9 +5,9 @@ import cn from 'classnames';
 
 const MainContainer = () => {
   const a = 1;
-  const { popup } = useSelector((state) => state.app);
+  const { sidebar } = useSelector((state) => state.app);
   return (
-    <Container className={cn({ popup })}>
+    <Container className={cn({ sidebar })}>
       <Box>
         안녕 나는 테스트용 박스야
         안녕 나는 테스트용 박스야
@@ -28,7 +28,7 @@ const Container = styled.div`
   position: absolute;
   top: 56px;
   left: 240px;
-  &.popup{
+  &.sidebar{
     left: 72px;
   }
 `;

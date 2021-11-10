@@ -11,7 +11,7 @@ import SearchResults from '../components/SearchResults';
 
 const SearchContainer = () => {
   const { search } = useLocation();
-  const { popup } = useSelector((state) => state.app);
+  const { sidebar } = useSelector((state) => state.app);
   const { items } = useSelector((state) => state.search);
   const dispatch = useDispatch();
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
@@ -20,13 +20,14 @@ const SearchContainer = () => {
       part: 'snippet',
       q: search_query,
       key: ACCESS_KEY,
+      maxResults: 10,
     }));
   };
   useEffect(() => {
     getSearchResult();
   }, [search_query]);
   return (
-    <Container className={cn({ popup })}>
+    <Container className={cn({ sidebar })}>
 
       <SearchResults data={items} />
     </Container>
@@ -38,7 +39,7 @@ const Container = styled.div`
   top: 56px;
   left: 240px;
   right: 0;
-  &.popup{
+  &.sidebar{
     left: 72px;
   }
 `;

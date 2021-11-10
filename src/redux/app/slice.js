@@ -1,5 +1,5 @@
 const initialState = {
-  popup: false,
+  sidebar: false,
 };
 export const Action = {
   Types: {
@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case Action.Types.TOGGLE_POPUP: {
       return {
         ...state,
-        popup: action.payload,
+        sidebar: action.payload,
       };
     }
   }
