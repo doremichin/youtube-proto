@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
+import { Action } from '../../../redux/video/slice';
+import { ACCESS_KEY } from '../../../const/config';
+import VideoList from '../components/VideoList';
+
 const MainContainer = () => {
-  const a = 1;
   const { sidebar } = useSelector((state) => state.app);
+  const dispatch = useDispatch();
+
+  const getSearchResult = () => {
+    dispatch(Action.Creators.getVideoList({
+      part: 'snippet,statistics,contentDetails',
+      chart: 'mostPopular',
+      key: ACCESS_KEY,
+      regionCode: 'kr',
+      maxResults: 20,
+    }));
+  };
+  useEffect(() => {
+    getSearchResult();
+  }, []);
+
   return (
     <Container className={cn({ sidebar })}>
-      <Box>
-        안녕 나는 테스트용 박스야
-        안녕 나는 테스트용 박스야
-        안녕 나는 테스트용 박스야
-        안녕 나는 테스트용 박스야
-      </Box>
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
+      <VideoList />
+
     </Container>
   );
 };
@@ -28,6 +36,7 @@ const Container = styled.div`
   position: absolute;
   top: 56px;
   left: 240px;
+  right: 0;
   &.sidebar{
     left: 72px;
   }

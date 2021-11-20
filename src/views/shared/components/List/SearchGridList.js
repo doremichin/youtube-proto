@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MainList = ({ data = [], searchItem = () => {}, subscribeItem = () => {} }) => {
+const SearchGridList = ({ data = [], searchItem = () => {}, subscribeItem = () => {} }) => {
   const a = 1;
   return (
     <Container>
@@ -41,4 +41,4 @@ const Col = styled.div`
     margin-bottom: 10px;
 `;
 
-export default MainList;
+export default SearchGridList;
