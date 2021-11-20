@@ -28,7 +28,6 @@ const SearchContainer = () => {
   }, [search_query]);
   return (
     <Container className={cn({ sidebar })}>
-
       <SearchResults data={items} />
     </Container>
   );
