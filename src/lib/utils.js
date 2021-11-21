@@ -13,7 +13,11 @@ export const dateCalculate = (otherDate = '') => {
 
   if (currentYear - otherYear > 0) return `${currentYear - otherYear}년전`;
   if (currentMonth - otherMonth > 0) return `${currentMonth - otherMonth}달전`;
-  if (currentDay - otherDay > 0) return `${currentDay - otherDay}일전`;
+  if (currentDay - otherDay > 1) return `${currentDay - otherDay}일전`;
+  if (currentDay - otherDay === 1) {
+    if (24 - otherHour + currentHour > 23) return '1일전';
+    return `${24 - otherHour + currentHour}시간전`;
+  }
   if (currentHour - otherHour > 0) return `${currentHour - otherHour}시간전`;
   if (currentMinute - otherMinute > 0) return `${currentMinute - otherMinute}분전`;
   return null;

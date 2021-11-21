@@ -46,5 +46,6 @@ const Button = styled.button`
   height: 40px;
   border: none;
   fill: #fff;
+  cursor: pointer;
 `;
 export default SearchBox;

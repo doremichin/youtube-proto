@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -6,28 +6,34 @@ import cn from 'classnames';
 import { Action } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import VideoList from '../components/VideoList';
+import InfiniteScroll from '../../shared/components/InfiniteScroll';
 
 const MainContainer = () => {
   const { sidebar } = useSelector((state) => state.app);
   const dispatch = useDispatch();
+  const [videos, setVideos] = useState(20);
 
-  const getSearchResult = () => {
+  const getVideos = () => {
     dispatch(Action.Creators.getVideoList({
       part: 'snippet,statistics,contentDetails',
       chart: 'mostPopular',
       key: ACCESS_KEY,
       regionCode: 'kr',
-      maxResults: 20,
+      maxResults: videos,
     }));
   };
   useEffect(() => {
-    getSearchResult();
-  }, []);
+    getVideos();
+  }, [videos]);
+  const next = () => {
+    setVideos((p) => p + 10);
+  };
 
   return (
     <Container className={cn({ sidebar })}>
-      <VideoList />
-
+      <InfiniteScroll next={next}>
+        <VideoList />
+      </InfiniteScroll>
     </Container>
   );
 };
