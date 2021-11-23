@@ -36,10 +36,10 @@ const SearchContainer = () => {
 const Container = styled.div`
   position: absolute;
   top: 56px;
-  left: 240px;
+  left: 72px;
   right: 0;
   &.sidebar{
-    left: 72px;
+    left: 240px;
   }
 `;
 

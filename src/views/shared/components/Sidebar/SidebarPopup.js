@@ -57,12 +57,13 @@ const Container = styled.div`
   position: fixed;
   z-index: 10;
   top: 56px;
-  left: 0;
   width: 240px;
+  left: -100%;
+
   height: 100vh;
   background: rgba(33, 33, 33, 0.98);
   &.view{
-    left: -100%;
+    left: 0;
   }
 `;
 const List = styled.ul`

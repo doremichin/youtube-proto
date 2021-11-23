@@ -1,8 +1,7 @@
 const initialState = {
-  items: [
-    { player: {} },
-  ],
+  data: {},
   list: {},
+  comments: {},
 };
 export const Action = {
   Types: {
@@ -10,6 +9,8 @@ export const Action = {
     SET_VIDEO_BY_ID: '@@VIDEO/SET_VIDEO_BY_ID',
     GET_VIDEO_LIST: '@@VIDEO/GET_VIDEO_LIST',
     SET_VIDEO_LIST: '@@VIDEO/SET_VIDEO_LIST',
+    GET_VIDEO_COMMENTS: '@@VIDEO/GET_VIDEO_COMMENTS',
+    SET_VIDEO_COMMENTS: '@@VIDEO/SET_VIDEO_COMMENTS',
   },
   Creators: {
     getVideoById: (payload) => ({
@@ -28,6 +29,14 @@ export const Action = {
       type: Action.Types.SET_VIDEO_LIST,
       payload,
     }),
+    getVideoComments: (payload) => ({
+      type: Action.Types.GET_VIDEO_COMMENTS,
+      payload,
+    }),
+    setVideoComments: (payload) => ({
+      type: Action.Types.SET_VIDEO_COMMENTS,
+      payload,
+    }),
   },
 };
 const reducer = (state = initialState, action) => {
@@ -36,13 +45,20 @@ const reducer = (state = initialState, action) => {
     case Action.Types.SET_VIDEO_BY_ID: {
       return {
         ...state,
-        ...action.payload,
+        data: { ...action.payload }
+        ,
       };
     }
     case Action.Types.SET_VIDEO_LIST: {
       return {
         ...state,
         list: { ...action.payload },
+      };
+    }
+    case Action.Types.SET_VIDEO_COMMENTS: {
+      return {
+        ...state,
+        comments: { ...action.payload },
       };
     }
   }

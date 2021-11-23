@@ -9,8 +9,8 @@ import Video from './pages/Video';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Main} />
-    <Route path="/results" component={Search} />
-    <Route path="/watch" component={Video} />
+    <Route exact path="/results" component={Search} />
+    <Route exact path="/watch" component={Video} />
   </Switch>
 );
 

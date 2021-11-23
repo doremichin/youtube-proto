@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 import SidebarPopup from '../components/Sidebar/SidebarPopup';
 import SidebarStatic from '../components/Sidebar/SidebarStatic';
@@ -11,7 +12,10 @@ const SidebarContainer = () => {
   return (
     <Container>
       <SidebarPopup view={sidebar} />
-      <SidebarStatic />
+      <Route exact path={['/', '/results']}>
+        <SidebarStatic />
+      </Route>
+
     </Container>
   );
 };

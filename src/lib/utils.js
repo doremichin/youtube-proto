@@ -29,3 +29,20 @@ export const viewCalculate = (viewCount) => {
   if (viewCount >= 1000) return `${Math.floor(viewCount / 100) / 10}천회`;
   return `${viewCount}회`;
 };
+
+export const transDate = (date) => {
+  const year = date.substring(0, 4);
+  const month = date.substring(5, 7);
+  const day = date.substring(8, 10);
+  return `${year}. ${month}. ${day}`;
+};
+
+export const likeCalculate = (count) => {
+  if (count >= 10000) {
+    return `${Math.floor(count / 1000) / 10}만`;
+  }
+  if (count >= 1000) {
+    return `${Math.floor(count / 100) / 10}천`;
+  }
+  return `${count}`;
+};
