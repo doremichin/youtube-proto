@@ -1,17 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { dateCalculate, viewCalculate } from '../../../../lib/utils';
+import { Action } from '../../../../redux/app/slice';
 
 const VideoItem = ({ item }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const publishedDate = item.snippet.publishedAt;
   const gapToCurrentDay = dateCalculate(publishedDate);
   const viewCount = Number(item.statistics.viewCount);
   const views = viewCalculate(viewCount);
 
+  const clickVideo = () => {
+    dispatch(Action.Creators.togglePopup(false));
+    history.push(`/watch?v=${item.id}`);
+  };
+
   return (
-    <Container to={`/watch?v=${item.id}`}>
+    <Container onClick={clickVideo}>
       <Top>
         <Image>
           <img src={item.snippet.thumbnails.medium.url} alt="" />
@@ -33,7 +42,7 @@ const VideoItem = ({ item }) => {
   );
 };
 
-const Container = styled(Link)`
+const Container = styled.div`
   cursor: pointer;
 `;
 const Top = styled.div`

@@ -1,11 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { Action } from '../../../../redux/app/slice';
 
 const SearchItem = ({ item }) => {
-  const a = 1;
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const clickVideo = () => {
+    dispatch(Action.Creators.togglePopup(false));
+    history.push(`/watch?v=${item.id.videoId}`);
+  };
+
   return (
-    <Container to={`/watch?v=${item.id.videoId}`}>
+    <Container onClick={clickVideo}>
       <Thumb>
         <Image>
           <img src={item.snippet.thumbnails.medium.url} alt="" />
@@ -22,7 +31,7 @@ const SearchItem = ({ item }) => {
   );
 };
 
-const Container = styled(Link)`
+const Container = styled.div`
   display: flex;
   align-items: center;
 `;

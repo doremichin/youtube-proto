@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,11 +8,9 @@ import SidebarContainer from './SidebarContainer';
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
-  const { popup } = useSelector((state) => state.app);
-  const [toggle, setToggle] = useState(popup);
+  const { sidebar } = useSelector((state) => state.app);
   const togglePopup = () => {
-    setToggle(!toggle);
-    dispatch(Action.Creators.togglePopup(!toggle));
+    dispatch(Action.Creators.togglePopup(!sidebar));
   };
   return (
     <Container>

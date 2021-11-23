@@ -40,11 +40,12 @@ const MainContainer = () => {
 
 const Container = styled.div`
   position: absolute;
+  left: 72px;
   top: 56px;
-  left: 240px;
   right: 0;
   &.sidebar{
-    left: 72px;
+    left: 240px;
+
   }
 `;
 const Box = styled.div`
