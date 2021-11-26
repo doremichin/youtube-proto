@@ -7,12 +7,12 @@ const MainGridList = ({ data = [], renderItem }) => {
     <Container>
       <Row>
         {
-              data.map((item) => (
-                <Col>
-                  {renderItem(item)}
-                </Col>
-              ))
-          }
+          data.map((item, index) => (
+            <Col key={item.id || index}>
+              {renderItem(item)}
+            </Col>
+          ))
+        }
       </Row>
     </Container>
   );
@@ -27,9 +27,21 @@ const Row = styled.div`
   margin: 0 -10px;
 `;
 const Col = styled.div`
-  width: 25%;
+  width: 16.6%;
   padding: 0 10px;
   margin-bottom: 40px;
+  @media ${(props) => props.theme.desktop} {
+    width: 20%;
+  }
+  @media ${(props) => props.theme.laptop} {
+    width: 25%;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 33.3%;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 50%;
+  }
 `;
 
 export default MainGridList;

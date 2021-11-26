@@ -10,11 +10,12 @@ import {
 const VideoDetailInfo = ({ data }) => {
   const tags = [];
   for (let i = 0; i < 4; i++) {
-    if (!data.snippet.tags) break;
-    tags.push(data.snippet.tags[i]);
+    if (!data?.snippet?.tags) break;
+    tags.push(data?.snippet?.tags[i]);
   }
 
-  const publishedDate = transDate(data.snippet.publishedAt);
+  const publishedDate = transDate(data?.snippet?.publishedAt);
+
   return (
     <Container>
       <Left>

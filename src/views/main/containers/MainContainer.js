@@ -11,7 +11,8 @@ import InfiniteScroll from '../../shared/components/InfiniteScroll';
 const MainContainer = () => {
   const { sidebar } = useSelector((state) => state.app);
   const dispatch = useDispatch();
-  const [videos, setVideos] = useState(20);
+  const [videos, setVideos] = useState(30);
+  const { items } = useSelector((state) => state.video.list);
 
   const getVideos = () => {
     dispatch(Action.Creators.getVideoList({
@@ -26,13 +27,15 @@ const MainContainer = () => {
     getVideos();
   }, [videos]);
   const next = () => {
-    setVideos((p) => p + 10);
+    if (items?.length > 0) {
+      setVideos((p) => p + 10);
+    }
   };
 
   return (
     <Container className={cn({ sidebar })}>
       <InfiniteScroll next={next}>
-        <VideoList />
+        <VideoList items={items} />
       </InfiniteScroll>
     </Container>
   );

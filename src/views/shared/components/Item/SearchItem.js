@@ -1,20 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-import { Action } from '../../../../redux/app/slice';
-
-const SearchItem = ({ item }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const clickVideo = () => {
-    dispatch(Action.Creators.togglePopup(false));
-    history.push(`/watch?v=${item.id.videoId}`);
-  };
-
+const SearchItem = ({
+  item, onClick, channels, channelId,
+}) => {
+  if (!item?.snippet || !channels[channelId]) return null;
   return (
-    <Container onClick={clickVideo}>
+    <Container onClick={onClick}>
       <Thumb>
         <Image>
           <img src={item.snippet.thumbnails.medium.url} alt="" />
@@ -23,7 +15,12 @@ const SearchItem = ({ item }) => {
       <Content>
         <Title>{item.snippet.title}</Title>
         <Channel>
-          1
+          <ChannelThumb>
+            <img src={channels[channelId].items[0].snippet.thumbnails.medium.url} alt="" />
+          </ChannelThumb>
+          <ChannelTitle>
+            {channels[channelId].items[0].snippet.title}
+          </ChannelTitle>
         </Channel>
         <Desc>{item.snippet.description}</Desc>
       </Content>
@@ -34,6 +31,7 @@ const SearchItem = ({ item }) => {
 const Container = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const Thumb = styled.div`
   flex-shrink: 0;
@@ -61,7 +59,20 @@ const Title = styled.h2`
   margin-bottom: 10px;
 `;
 const Channel = styled.div`
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+`;
+const ChannelThumb = styled.div`
+  width: 24px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 6px;
+`;
+const ChannelTitle = styled.div`
+  color: #aaa;
+  font-size: 12px;
 `;
 const Desc = styled.p`
   font-size: 12px;

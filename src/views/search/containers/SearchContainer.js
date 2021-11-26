@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import qs from 'qs';
@@ -8,6 +8,7 @@ import cn from 'classnames';
 import { Action } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import SearchResults from '../components/SearchResults';
+import InfiniteScroll from '../../shared/components/InfiniteScroll';
 
 const SearchContainer = () => {
   const { search } = useLocation();
@@ -15,20 +16,29 @@ const SearchContainer = () => {
   const { items } = useSelector((state) => state.search);
   const dispatch = useDispatch();
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
+  const [results, setResults] = useState(10);
   const getSearchResult = () => {
     dispatch(Action.Creators.getSearchResults({
       part: 'snippet',
       q: search_query,
       key: ACCESS_KEY,
-      maxResults: 10,
+      maxResults: results,
     }));
   };
   useEffect(() => {
     getSearchResult();
-  }, [search_query]);
+  }, [search_query, results]);
+
+  if (!items?.length) return null;
+
+  const next = () => {
+    setResults((p) => p + 10);
+  };
   return (
     <Container className={cn({ sidebar })}>
-      <SearchResults data={items} />
+      <InfiniteScroll next={next}>
+        <SearchResults data={items} />
+      </InfiniteScroll>
     </Container>
   );
 };
@@ -38,6 +48,7 @@ const Container = styled.div`
   top: 56px;
   left: 72px;
   right: 0;
+  padding-top: 30px;
   &.sidebar{
     left: 240px;
   }
