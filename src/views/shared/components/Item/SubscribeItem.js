@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { DefaultButton } from '../Button/Button.styled';
+import SubscribeButton from '../Button/SubscribeButton';
 
 const SubscribeItem = ({ item }) => {
   const a = 1;
@@ -16,14 +16,13 @@ const SubscribeItem = ({ item }) => {
         <Title>{item.snippet.title}</Title>
         <Desc>{item.snippet.description}</Desc>
       </Content>
-      <SubscribeButton>
-        구독
-      </SubscribeButton>
+      <SubscribeButton />
     </Container>
   );
 };
 
 const Container = styled.div`
+  height: 200px;
   display: flex;
   align-items: center;
   padding: 15px 0;
@@ -48,7 +47,7 @@ const Image = styled.div`
   }
 `;
 const Content = styled.div`
-    flex-shrink: 1;
+  flex: 1;
   padding-left: 15px;
   padding-right: 40px;
 `;
@@ -62,13 +61,5 @@ const Desc = styled.p`
   font-size: 12px;
   color: #aaa;
 `;
-const SubscribeButton = styled(DefaultButton)`
-  flex-shrink: 0;
-  width: 72px;
-  height: 37px;
-  background: #ff0000;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 2px;
-`;
+
 export default SubscribeItem;

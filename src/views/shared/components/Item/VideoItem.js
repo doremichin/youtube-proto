@@ -1,42 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import { dateCalculate, viewCalculate } from '../../../../lib/utils';
-import { Action } from '../../../../redux/app/slice';
 
-const VideoItem = ({ item }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+const VideoItem = ({ item, onClick, channels }) => {
   const publishedDate = item.snippet.publishedAt;
   const gapToCurrentDay = dateCalculate(publishedDate);
   const viewCount = Number(item.statistics.viewCount);
   const views = viewCalculate(viewCount);
 
-  const clickVideo = () => {
-    dispatch(Action.Creators.togglePopup(false));
-    history.push(`/watch?v=${item.id}`);
-  };
-
   return (
-    <Container onClick={clickVideo}>
+    <Container onClick={onClick}>
       <Top>
-        <Image>
+        <VideoThumb>
           <img src={item.snippet.thumbnails.medium.url} alt="" />
-        </Image>
+        </VideoThumb>
       </Top>
       <Bottom>
-        <Title>
-          {item.snippet.title}
-        </Title>
-        <ChannelTitle>
-          {item.snippet.channelTitle}
-        </ChannelTitle>
-        <Static>
-          <span>조회수 {views}</span>&nbsp;·&nbsp;
-          <span>{gapToCurrentDay}</span>
-        </Static>
+        <Left>
+          <ChannelThumb>
+            <img src={channels.items[0].snippet.thumbnails.medium.url} alt="" />
+          </ChannelThumb>
+        </Left>
+        <Right>
+          <Title>
+            {item.snippet.title}
+          </Title>
+          <ChannelTitle>
+            {item.snippet.channelTitle}
+          </ChannelTitle>
+          <Static>
+            <span>조회수 {views}회</span>&nbsp;·&nbsp;
+            <span>{gapToCurrentDay}</span>
+          </Static>
+        </Right>
       </Bottom>
     </Container>
   );
@@ -48,7 +45,7 @@ const Container = styled.div`
 const Top = styled.div`
     margin-bottom: 12px;
 `;
-const Image = styled.div`
+const VideoThumb = styled.div`
   width: 100%;
   img{
     width: 100%;
@@ -57,6 +54,18 @@ const Image = styled.div`
 const Bottom = styled.div`
   font-size: 14px;
   color: #aaa;
+  display: flex;
+`;
+const Left = styled.div`
+  margin-right: 10px;
+`;
+const ChannelThumb = styled.div`
+  width: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+const Right = styled.div`
+  
 `;
 const Title = styled.p`
   color: #fff;

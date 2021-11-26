@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import MainGridList from '../../shared/components/List/MainGridList';
-import VideoItem from '../../shared/components/Item/VideoItem';
+import VideoItemContainer from '../../shared/containers/VideoItemContainer';
 
-const VideoList = () => {
-  const { items } = useSelector((state) => state.video.list);
-
-  const renderItem = (item) => <VideoItem item={item} />;
+const VideoList = ({ items }) => {
+  const renderItem = (item) => <VideoItemContainer item={item} />;
   return (
     <Container>
       <MainGridList data={items} renderItem={renderItem} />

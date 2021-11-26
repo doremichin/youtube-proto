@@ -14,7 +14,9 @@ const InfiniteScroll = ({ children, next = () => {} }) => {
   return (
     <Container>
       {children}
-      <Sentinel ref={sentinelRef} />
+      <Sentinel ref={sentinelRef}>
+        <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="" />
+      </Sentinel>
     </Container>
   );
 };
@@ -24,6 +26,11 @@ const Container = styled.div`
 `;
 const Sentinel = styled.div`
   height: 100px;
-  background-color: #18f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img{
+    width: 30px;
+  }
 `;
 export default InfiniteScroll;

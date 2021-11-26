@@ -38,7 +38,7 @@ const Row = styled.div`
   flex-direction: column;
 `;
 const Col = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 `;
 
 export default SearchGridList;

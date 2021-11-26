@@ -24,10 +24,10 @@ export const dateCalculate = (otherDate = '') => {
 };
 
 export const viewCalculate = (viewCount) => {
-  if (viewCount >= 100000) return `${Math.floor(viewCount / 10000)}만회`;
-  if (viewCount >= 10000) return `${Math.floor(viewCount / 1000) / 10}만회`;
-  if (viewCount >= 1000) return `${Math.floor(viewCount / 100) / 10}천회`;
-  return `${viewCount}회`;
+  if (viewCount >= 100000) return `${Math.floor(viewCount / 10000)}만`;
+  if (viewCount >= 10000) return `${Math.floor(viewCount / 1000) / 10}만`;
+  if (viewCount >= 1000) return `${Math.floor(viewCount / 100) / 10}천`;
+  return `${viewCount}`;
 };
 
 export const transDate = (date) => {

@@ -10,6 +10,7 @@ import { ACCESS_KEY } from '../../../const/config';
 import { SectionContainer } from '../../shared/components/Layout/Layout.styled';
 import VideoDetailInfo from '../components/VideoDetailInfo';
 import CommentsContainer from './CommentsContainer';
+import VideoChannelInfo from '../components/VideoChannelInfo';
 
 const VideoContainer = () => {
   const { search } = useLocation();
@@ -25,6 +26,7 @@ const VideoContainer = () => {
       id: v,
     }));
   }, [v]);
+
   if (!videoData) return null;
   return (
     <>
@@ -36,6 +38,7 @@ const VideoContainer = () => {
           </VideoSection>
           <RelatedDetailSection>
             <VideoDetailInfo data={videoData} />
+            <VideoChannelInfo />
             <CommentsContainer id={v} commentCount={videoData.statistics.commentCount} />
           </RelatedDetailSection>
         </SectionContainer>
