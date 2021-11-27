@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../components/Header';
-import { Action } from '../../../redux/app/slice';
 import SidebarContainer from './SidebarContainer';
+import { selectSidebar, togglePopup } from '../../../redux/app/slice';
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
-  const { sidebar } = useSelector((state) => state.app);
-  const togglePopup = () => {
-    dispatch(Action.Creators.togglePopup(!sidebar));
+  const sidebar = useSelector(selectSidebar);
+  const toggle = () => {
+    dispatch(togglePopup(!sidebar));
   };
   return (
     <Container>
-      <Header togglePopup={togglePopup} />
+      <Header togglePopup={toggle} />
       <SidebarContainer />
     </Container>
   );

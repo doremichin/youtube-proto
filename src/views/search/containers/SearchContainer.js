@@ -5,20 +5,21 @@ import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { Action } from '../../../redux/search/slice';
+import { searchActions, selectSearchData } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import SearchResults from '../components/SearchResults';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
+import { selectSidebar } from '../../../redux/app/slice';
 
 const SearchContainer = () => {
   const { search } = useLocation();
-  const { sidebar } = useSelector((state) => state.app);
-  const { items } = useSelector((state) => state.search);
+  const { sidebar } = useSelector(selectSidebar);
+  const { items } = useSelector(selectSearchData);
   const dispatch = useDispatch();
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
   const [results, setResults] = useState(10);
   const getSearchResult = () => {
-    dispatch(Action.Creators.getSearchResults({
+    dispatch(searchActions.getSearchResults({
       part: 'snippet',
       q: search_query,
       key: ACCESS_KEY,
@@ -29,7 +30,7 @@ const SearchContainer = () => {
     getSearchResult();
   }, [search_query, results]);
 
-  if (!items?.length) return null;
+  if (!items) return null;
 
   const next = () => {
     setResults((p) => p + 10);

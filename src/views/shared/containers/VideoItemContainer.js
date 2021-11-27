@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { Action } from '../../../redux/app/slice';
-import { Action as channelsAction } from '../../../redux/channels/slice';
+import { togglePopup } from '../../../redux/app/slice';
+import { getChannelsData } from '../../../redux/channels/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import VideoItem from '../components/Item/VideoItem';
 
@@ -13,11 +13,11 @@ const VideoItemContainer = ({ item }) => {
   const history = useHistory();
   const id = String(item.snippet.channelId);
   const clickVideo = () => {
-    dispatch(Action.Creators.togglePopup(false));
+    dispatch(togglePopup(false));
     history.push(`/watch?v=${item.id}`);
   };
   useEffect(() => {
-    dispatch(channelsAction.Creators.getChannelsData({
+    dispatch(getChannelsData({
       part: 'snippet,contentDetails',
       key: ACCESS_KEY,
       id,

@@ -1,15 +1,15 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import { Action } from './slice';
+import { getChannelsData, setChannelsData } from './slice';
 import { getChannelsDataRest } from '../../api';
 
-function* getChannelsData({ payload }) {
+function* getChannels({ payload }) {
   const result = yield call(getChannelsDataRest, payload);
-  yield put(Action.Creators.setChannelsData({ id: payload.id, data: result }));
+  yield put(setChannelsData({ id: payload.id, data: result }));
 }
 
 function* saga() {
-  yield takeEvery(Action.Types.GET_CHANNELS_DATA, getChannelsData);
+  yield takeEvery(getChannelsData, getChannels);
 }
 
 export default saga;

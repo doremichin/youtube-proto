@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SearchItem from '../components/Item/SearchItem';
-import { Action } from '../../../redux/app/slice';
-import { Action as channelsAction } from '../../../redux/channels/slice';
+import { togglePopup } from '../../../redux/app/slice';
+import { getChannelsData, selectChannels } from '../../../redux/channels/slice';
 import { ACCESS_KEY } from '../../../const/config';
 
 const SearchItemContainer = ({ item }) => {
@@ -13,17 +13,17 @@ const SearchItemContainer = ({ item }) => {
   const history = useHistory();
   const id = item.snippet.channelId;
   const clickVideo = () => {
-    dispatch(Action.Creators.togglePopup(false));
+    dispatch(togglePopup(false));
     history.push(`/watch?v=${item.id.videoId}`);
   };
   useEffect(() => {
-    dispatch(channelsAction.Creators.getChannelsData({
+    dispatch(getChannelsData({
       part: 'snippet,contentDetails',
       key: ACCESS_KEY,
       id,
     }));
   }, []);
-  const channels = useSelector((state) => state.channels);
+  const channels = useSelector(selectChannels);
   return (
     <Container>
       <SearchItem item={item} onClick={clickVideo} channels={channels} channelId={id} />

@@ -3,21 +3,21 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import SubscribeButton from '../../shared/components/Button/SubscribeButton';
+import { getChannelsData } from '../../../redux/channels/slice';
 import { ACCESS_KEY } from '../../../const/config';
-import { Action as ChannelsAction } from '../../../redux/channels/slice';
+import SubscribeButton from '../../shared/components/Button/SubscribeButton';
 import { viewCalculate } from '../../../lib/utils';
 
 const VideoChannelInfo = () => {
   const dispatch = useDispatch();
-  const { description, channelId } = useSelector((state) => state.video?.data?.items?.[0].snippet);
+  const { description, channelId } = useSelector((state) => state.video.data?.items?.[0].snippet);
   const channelData = useSelector((state) => state.channels[channelId]);
   const [detail, setDetail] = useState(false);
   const clickDetail = () => {
     setDetail((p) => !p);
   };
   useEffect(() => {
-    dispatch(ChannelsAction.Creators.getChannelsData({
+    dispatch(getChannelsData({
       part: 'snippet,contentDetails,statistics',
       key: ACCESS_KEY,
       id: channelId,
