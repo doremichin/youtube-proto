@@ -1,15 +1,23 @@
-import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
 
-import reducers from './reducers';
+import appReducer from './app/slice';
 import sagas from './sagas';
+import searchReducer from './search/slice';
+import videoReducer from './video/slice';
+import channelsReducer from './channels/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducers, composeWithDevTools(
-  applyMiddleware(sagaMiddleware),
-));
+const store = configureStore({
+  reducer: {
+    app: appReducer,
+    search: searchReducer,
+    video: videoReducer,
+    channels: channelsReducer,
+  },
+  middleware: [sagaMiddleware],
+});
 
 sagaMiddleware.run(sagas);
 

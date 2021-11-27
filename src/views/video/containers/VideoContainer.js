@@ -5,7 +5,7 @@ import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { Action } from '../../../redux/video/slice';
+import { getVideoById, selectVideo } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import { SectionContainer } from '../../shared/components/Layout/Layout.styled';
 import VideoDetailInfo from '../components/VideoDetailInfo';
@@ -15,31 +15,31 @@ import VideoChannelInfo from '../components/VideoChannelInfo';
 const VideoContainer = () => {
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const videoData = useSelector((state) => state.video?.data?.items?.[0]);
+  const { data } = useSelector(selectVideo);
   const { sidebar } = useSelector((state) => state.app);
   const { v } = qs.parse(search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
-    dispatch(Action.Creators.getVideoById({
+    dispatch(getVideoById({
       part: 'snippet,player,statistics',
       key: ACCESS_KEY,
       id: v,
     }));
   }, [v]);
 
-  if (!videoData) return null;
+  if (!data.items) return null;
   return (
     <>
       <Screen className={cn({ sidebar })} />
       <Container>
         <SectionContainer>
           <VideoSection>
-            <Video dangerouslySetInnerHTML={{ __html: videoData.player.embedHtml }} />
+            <Video dangerouslySetInnerHTML={{ __html: data?.items?.[0].player.embedHtml }} />
           </VideoSection>
           <RelatedDetailSection>
-            <VideoDetailInfo data={videoData} />
+            <VideoDetailInfo data={data?.items?.[0]} />
             <VideoChannelInfo />
-            <CommentsContainer id={v} commentCount={videoData.statistics.commentCount} />
+            <CommentsContainer id={v} commentCount={data?.items?.[0].statistics.commentCount} />
           </RelatedDetailSection>
         </SectionContainer>
       </Container>

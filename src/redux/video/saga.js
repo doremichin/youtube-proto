@@ -1,25 +1,27 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { Action } from './slice';
+import {
+  getVideoById, getVideoComments, getVideoList, setVideoById, setVideoComments, setVideoList,
+} from './slice';
 import { getVideoByIdRest, getVideoCommentsRest, getVideoListRest } from '../../api';
 
-function* getVideoById({ payload }) {
+function* asyncGetVideoById({ payload }) {
   const result = yield call(getVideoByIdRest, payload);
-  yield put(Action.Creators.setVideoById(result));
+  yield put(setVideoById(result));
 }
-function* getVideoList({ payload }) {
+function* asyncGetVideoList({ payload }) {
   const result = yield call(getVideoListRest, payload);
-  yield put(Action.Creators.setVideoList(result));
+  yield put(setVideoList(result));
 }
-function* getVideoComments({ payload }) {
+function* asyncGetVideoComments({ payload }) {
   const result = yield call(getVideoCommentsRest, payload);
-  yield put(Action.Creators.setVideoComments(result));
+  yield put(setVideoComments(result));
 }
 
 function* saga() {
-  yield takeLatest(Action.Types.GET_VIDEO_BY_ID, getVideoById);
-  yield takeLatest(Action.Types.GET_VIDEO_LIST, getVideoList);
-  yield takeLatest(Action.Types.GET_VIDEO_COMMENTS, getVideoComments);
+  yield takeLatest(getVideoById, asyncGetVideoById);
+  yield takeLatest(getVideoList, asyncGetVideoList);
+  yield takeLatest(getVideoComments, asyncGetVideoComments);
 }
 
 export default saga;

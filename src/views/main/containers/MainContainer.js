@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { Action } from '../../../redux/video/slice';
+import { getVideoList, selectVideo } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import VideoList from '../components/VideoList';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
@@ -12,10 +12,10 @@ const MainContainer = () => {
   const { sidebar } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const [videos, setVideos] = useState(30);
-  const { items } = useSelector((state) => state.video.list);
+  const { list } = useSelector(selectVideo);
 
   const getVideos = () => {
-    dispatch(Action.Creators.getVideoList({
+    dispatch(getVideoList({
       part: 'snippet,statistics,contentDetails',
       chart: 'mostPopular',
       key: ACCESS_KEY,
@@ -27,7 +27,7 @@ const MainContainer = () => {
     getVideos();
   }, [videos]);
   const next = () => {
-    if (items?.length > 0) {
+    if (list.items?.length > 0) {
       setVideos((p) => p + 10);
     }
   };
@@ -35,7 +35,7 @@ const MainContainer = () => {
   return (
     <Container className={cn({ sidebar })}>
       <InfiniteScroll next={next}>
-        <VideoList items={items} />
+        <VideoList items={list.items} />
       </InfiniteScroll>
     </Container>
   );
