@@ -5,23 +5,23 @@ import {
 } from './slice';
 import { getVideoByIdRest, getVideoCommentsRest, getVideoListRest } from '../../api';
 
-function* asyncGetVideoById({ payload }) {
+function* getVideoByIdSaga({ payload }) {
   const result = yield call(getVideoByIdRest, payload);
   yield put(setVideoById(result));
 }
-function* asyncGetVideoList({ payload }) {
+function* getVideoListSaga({ payload }) {
   const result = yield call(getVideoListRest, payload);
   yield put(setVideoList(result));
 }
-function* asyncGetVideoComments({ payload }) {
+function* getVideoCommentsSaga({ payload }) {
   const result = yield call(getVideoCommentsRest, payload);
   yield put(setVideoComments(result));
 }
 
 function* saga() {
-  yield takeLatest(getVideoById, asyncGetVideoById);
-  yield takeLatest(getVideoList, asyncGetVideoList);
-  yield takeLatest(getVideoComments, asyncGetVideoComments);
+  yield takeLatest(getVideoById, getVideoByIdSaga);
+  yield takeLatest(getVideoList, getVideoListSaga);
+  yield takeLatest(getVideoComments, getVideoCommentsSaga);
 }
 
 export default saga;
