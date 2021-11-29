@@ -62,4 +62,4 @@ const Desc = styled.p`
   color: #aaa;
 `;
 
-export default SubscribeItem;
+export default React.memo(SubscribeItem);

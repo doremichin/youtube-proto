@@ -19,7 +19,10 @@ const VideoItem = ({ item, onClick, channels }) => {
       <Bottom>
         <Left>
           <ChannelThumb>
-            <img src={channels.items[0].snippet.thumbnails.medium.url} alt="" />
+            {
+              channels
+                && <img src={channels.items[0].snippet.thumbnails.medium.url} alt="" />
+            }
           </ChannelThumb>
         </Left>
         <Right>
@@ -61,8 +64,10 @@ const Left = styled.div`
 `;
 const ChannelThumb = styled.div`
   width: 36px;
+  height: 36px;
   border-radius: 50%;
   overflow: hidden;
+  background: #333;
 `;
 const Right = styled.div`
   
@@ -84,4 +89,5 @@ const Static = styled.div`
     display: inline-block;
   }
 `;
-export default VideoItem;
+
+export default React.memo(VideoItem);

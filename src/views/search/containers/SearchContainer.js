@@ -1,43 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { searchActions, selectSearchData } from '../../../redux/search/slice';
+import { searchActions } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import SearchResults from '../components/SearchResults';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
-import { selectSidebar } from '../../../redux/app/slice';
 
 const SearchContainer = () => {
   const { search } = useLocation();
-  const { sidebar } = useSelector(selectSidebar);
-  const { items } = useSelector(selectSearchData);
   const dispatch = useDispatch();
+  const sidebar = useSelector((state) => state.app.sidebar);
+  const { items, nextPageToken } = useSelector((state) => state.search.data);
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
-  const [results, setResults] = useState(10);
   const getSearchResult = () => {
     dispatch(searchActions.getSearchResults({
       part: 'snippet',
       q: search_query,
       key: ACCESS_KEY,
-      maxResults: results,
+      maxResults: 10,
+      pageToken: nextPageToken,
     }));
   };
   useEffect(() => {
     getSearchResult();
-  }, [search_query, results]);
+  }, [search_query]);
 
   if (!items) return null;
 
   const next = () => {
-    setResults((p) => p + 10);
+    if (items.length > 0) {
+      getSearchResult();
+    }
   };
   return (
     <Container className={cn({ sidebar })}>
-      <InfiniteScroll next={next}>
+      <InfiniteScroll next={next} hasMore>
         <SearchResults data={items} />
       </InfiniteScroll>
     </Container>

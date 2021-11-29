@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SearchItem from '../components/Item/SearchItem';
-import { togglePopup } from '../../../redux/app/slice';
+import { toggleSidebar } from '../../../redux/app/slice';
 import { getChannelsData, selectChannels } from '../../../redux/channels/slice';
 import { ACCESS_KEY } from '../../../const/config';
 
@@ -13,7 +13,7 @@ const SearchItemContainer = ({ item }) => {
   const history = useHistory();
   const id = item.snippet.channelId;
   const clickVideo = () => {
-    dispatch(togglePopup(false));
+    dispatch(toggleSidebar(false));
     history.push(`/watch?v=${item.id.videoId}`);
   };
   useEffect(() => {

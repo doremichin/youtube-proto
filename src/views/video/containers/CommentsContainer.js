@@ -29,7 +29,7 @@ const CommentsContainer = ({ id, commentCount }) => {
 
   return (
     <Container>
-      <InfiniteScroll next={next}>
+      <InfiniteScroll next={next} hasMore>
         <Title>댓글 {Number(commentCount).toLocaleString()}개</Title>
         <VideoComments comments={comments.items} />
       </InfiniteScroll>

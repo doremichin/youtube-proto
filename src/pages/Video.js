@@ -3,14 +3,11 @@ import styled from 'styled-components';
 
 import VideoContainer from '../views/video/containers/VideoContainer';
 
-const Video = () => {
-  const a = 1;
-  return (
-    <Container>
-      <VideoContainer />
-    </Container>
-  );
-};
+const Video = () => (
+  <Container>
+    <VideoContainer />
+  </Container>
+);
 
 const Container = styled.div`
 

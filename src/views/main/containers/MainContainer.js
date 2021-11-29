@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { getVideoList, selectVideo } from '../../../redux/video/slice';
+import { getVideoList } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import VideoList from '../components/VideoList';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
 
 const MainContainer = () => {
-  const { sidebar } = useSelector((state) => state.app);
+  const sidebar = useSelector((state) => state.app.sidebar);
   const dispatch = useDispatch();
-  const [videos, setVideos] = useState(30);
-  const { list } = useSelector(selectVideo);
+  const { items, nextPageToken } = useSelector((state) => state.video.list);
 
   const getVideos = () => {
     dispatch(getVideoList({
@@ -20,22 +19,25 @@ const MainContainer = () => {
       chart: 'mostPopular',
       key: ACCESS_KEY,
       regionCode: 'kr',
-      maxResults: videos,
+      maxResults: 30,
+      pageToken: nextPageToken,
     }));
   };
   useEffect(() => {
     getVideos();
-  }, [videos]);
+  }, []);
+
   const next = () => {
-    if (list.items?.length > 0) {
-      setVideos((p) => p + 10);
+    if (items?.length > 0) {
+      getVideos();
     }
   };
+  if (!items) return null;
 
   return (
     <Container className={cn({ sidebar })}>
-      <InfiniteScroll next={next}>
-        <VideoList items={list.items} />
+      <InfiniteScroll next={next} hasMore={items?.length < 100}>
+        <VideoList items={items} />
       </InfiniteScroll>
     </Container>
   );
@@ -48,13 +50,7 @@ const Container = styled.div`
   right: 0;
   &.sidebar{
     left: 240px;
-
   }
 `;
-const Box = styled.div`
-  background: #18f;
-  height: 400px;
-  width: 500px;
-  color: #fff;
-`;
+
 export default MainContainer;

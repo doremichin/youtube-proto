@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CommentItem from '../../shared/components/Item/CommentItem';
+import CommentItem from '../../shared/components/Comment/CommentItem';
 
 const VideoComments = ({ comments }) => {
   if (!comments) return null;

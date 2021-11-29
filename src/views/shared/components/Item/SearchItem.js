@@ -78,4 +78,4 @@ const Desc = styled.p`
   font-size: 12px;
   color: #aaa;
 `;
-export default SearchItem;
+export default React.memo(SearchItem);
