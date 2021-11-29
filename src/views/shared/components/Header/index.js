@@ -1,21 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
-  IconApp, IconLogo, IconMenu, IconSetting,
+  IconApp, IconLogo, IconSettingDot,
 } from '../../../../icons';
 import SearchBoxContainer from '../../containers/SearchBoxContainer';
 import LoginButton from '../Button/LoginButton';
+import UserInfo from './UserInfo';
+import MenuButton from '../Button/MenuButton';
 
-const Header = ({ togglePopup }) => {
-  const a = 1;
+const Header = () => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <Container>
       <Left>
-        <ButtonMenu onClick={togglePopup}>
-          <IconMenu />
-        </ButtonMenu>
+        <MenuButton />
         <Logo to="/">
           <IconLogo />
         </Logo>
@@ -29,9 +31,12 @@ const Header = ({ togglePopup }) => {
             <IconApp />
           </ButtonApp>
           <ButtonSetting>
-            <IconSetting />
+            <IconSettingDot />
           </ButtonSetting>
-          <LoginButton />
+          {
+                user
+                  ? <UserInfo user={user} /> : <LoginButton />
+            }
         </ButtonGroup>
       </Right>
     </Container>
@@ -61,13 +66,7 @@ const Center = styled.div`
 `;
 const Right = styled.div`
 `;
-const ButtonMenu = styled.div`
-  padding: 8px;
-  width: 40px;
-  height: 40px;
-  fill: #fff;
-  cursor: pointer;
-`;
+
 const Logo = styled(Link)`
   width: 120px;
   height: 56px;
@@ -92,4 +91,4 @@ const ButtonSetting = styled.div`
   margin-right: 8px;
 `;
 
-export default Header;
+export default React.memo(Header);

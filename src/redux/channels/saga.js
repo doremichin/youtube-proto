@@ -9,7 +9,7 @@ function* getChannelsDataSaga({ payload }) {
 }
 
 function* saga() {
-  yield takeEvery(getChannelsData, getChannelsDataSaga);
+  yield takeEvery(getChannelsData.type, getChannelsDataSaga);
 }
 
 export default saga;

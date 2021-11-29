@@ -19,9 +19,9 @@ function* getVideoCommentsSaga({ payload }) {
 }
 
 function* saga() {
-  yield takeLatest(getVideoById, getVideoByIdSaga);
-  yield takeLatest(getVideoList, getVideoListSaga);
-  yield takeLatest(getVideoComments, getVideoCommentsSaga);
+  yield takeLatest(getVideoById.type, getVideoByIdSaga);
+  yield takeLatest(getVideoList.type, getVideoListSaga);
+  yield takeLatest(getVideoComments.type, getVideoCommentsSaga);
 }
 
 export default saga;

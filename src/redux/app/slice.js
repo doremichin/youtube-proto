@@ -6,12 +6,12 @@ const appSlice = createSlice({
     sidebar: false,
   },
   reducers: {
-    togglePopup: (state, action) => {
+    toggleSidebar: (state, action) => {
       state.sidebar = action.payload;
     },
   },
 });
 
 export default appSlice.reducer;
-export const { togglePopup } = appSlice.actions;
+export const { toggleSidebar } = appSlice.actions;
 export const selectSidebar = (state) => state.app.sidebar;

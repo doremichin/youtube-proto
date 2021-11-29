@@ -5,10 +5,9 @@ import { Route } from 'react-router-dom';
 
 import SidebarPopup from '../components/Sidebar/SidebarPopup';
 import SidebarStatic from '../components/Sidebar/SidebarStatic';
-import { selectSidebar } from '../../../redux/app/slice';
 
 const SidebarContainer = () => {
-  const sidebar = useSelector(selectSidebar);
+  const sidebar = useSelector((state) => state.app.sidebar);
   return (
     <Container>
       <SidebarPopup view={sidebar} />

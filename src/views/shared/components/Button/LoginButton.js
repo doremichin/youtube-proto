@@ -1,12 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { useGoogleLogin } from 'react-google-login';
 
 import { IconLogin } from '../../../../icons';
+import { setUserInfo } from '../../../../redux/auth/slice';
 
 const LoginButton = () => {
-  const a = 1;
+  const dispatch = useDispatch();
+  const onSuccess = (res) => {
+    const profile = res.profileObj;
+    dispatch(setUserInfo(profile));
+  };
+  const onFailure = (err) => {
+    console.log(err);
+  };
+  const { signIn, loaded } = useGoogleLogin({
+    onSuccess,
+    clientId: '896627521201-rdfc3vn6jqjq858ac6qo904oiaa9oiqc.apps.googleusercontent.com',
+    cookiePolicy: 'single_host_origin',
+    isSignedIn: true,
+    onFailure,
+  });
+  if (!loaded) return null;
   return (
-    <ButtonLogin>
+    <ButtonLogin onClick={signIn}>
       <IconWrapper className="loginIcon">
         <IconLogin />
       </IconWrapper>
@@ -14,6 +32,7 @@ const LoginButton = () => {
         로그인
       </ButtonName>
     </ButtonLogin>
+
   );
 };
 

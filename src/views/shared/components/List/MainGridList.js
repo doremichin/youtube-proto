@@ -1,22 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MainGridList = ({ data = [], renderItem }) => {
-  const a = 1;
-  return (
-    <Container>
-      <Row>
-        {
+const MainGridList = ({ data = [], renderItem }) => (
+  <Container>
+    <Row>
+      {
           data.map((item, index) => (
             <Col key={item.id || index}>
               {renderItem(item)}
             </Col>
           ))
         }
-      </Row>
-    </Container>
-  );
-};
+    </Row>
+  </Container>
+);
 
 const Container = styled.div`
 

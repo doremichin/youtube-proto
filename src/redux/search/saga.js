@@ -9,7 +9,7 @@ function* getSearchResultsSaga({ payload }) {
 }
 
 function* saga() {
-  yield takeLatest(searchActions.getSearchResults, getSearchResultsSaga);
+  yield takeLatest(searchActions.getSearchResults.type, getSearchResultsSaga);
 }
 
 export default saga;
