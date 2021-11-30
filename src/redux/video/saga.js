@@ -1,7 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
 import {
-  getVideoById, getVideoComments, getVideoList, setVideoById, setVideoComments, setVideoList,
+  getNewVideoList,
+  getVideoById, getVideoComments, getVideoList, setNewVideoList, setVideoById, setVideoComments, setVideoList,
 } from './slice';
 import { getVideoByIdRest, getVideoCommentsRest, getVideoListRest } from '../../api';
 
@@ -18,10 +19,16 @@ function* getVideoCommentsSaga({ payload }) {
   yield put(setVideoComments(result));
 }
 
+function* getNewVideoListSaga({ payload }) {
+  const result = yield call(getVideoListRest, payload);
+  yield put(setNewVideoList(result));
+}
+
 function* saga() {
   yield takeLatest(getVideoById.type, getVideoByIdSaga);
   yield takeLatest(getVideoList.type, getVideoListSaga);
   yield takeLatest(getVideoComments.type, getVideoCommentsSaga);
+  yield takeLatest(getNewVideoList.type, getNewVideoListSaga);
 }
 
 export default saga;
