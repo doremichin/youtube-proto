@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   IconApp, IconLogo, IconSettingDot,
@@ -10,14 +10,20 @@ import SearchBoxContainer from '../../containers/SearchBoxContainer';
 import LoginButton from '../Button/LoginButton';
 import UserInfo from './UserInfo';
 import MenuButton from '../Button/MenuButton';
+import { toggleSidebar } from '../../../../redux/app/slice';
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
-
+  const dispatch = useDispatch();
+  const sidebar = useSelector((state) => state.app.sidebar);
+  const toggle = () => {
+    dispatch(toggleSidebar(!sidebar));
+  };
   return (
     <Container>
       <Left>
-        <MenuButton />
+        <MenuButton toggle={toggle} />
+
         <Logo to="/">
           <IconLogo />
         </Logo>
