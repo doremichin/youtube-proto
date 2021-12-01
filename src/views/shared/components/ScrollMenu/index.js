@@ -103,10 +103,10 @@ const Arrow = styled.div`
   fill: #fff;
   cursor: pointer;
   ${(props) => props.left && css`
-    left: 0;
+    left: 10px;
   `}
   ${(props) => props.right && css`
-    right: 0;
+    right: 10px;
   `}
 `;
 export default ScrollMenu;

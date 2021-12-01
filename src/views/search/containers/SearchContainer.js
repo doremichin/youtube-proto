@@ -5,7 +5,7 @@ import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { searchActions } from '../../../redux/search/slice';
+import { getSearchResults } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import SearchResults from '../components/SearchResults';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
@@ -17,7 +17,7 @@ const SearchContainer = () => {
   const { items, nextPageToken } = useSelector((state) => state.search.data);
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
   const getSearchResult = () => {
-    dispatch(searchActions.getSearchResults({
+    dispatch(getSearchResults({
       part: 'snippet',
       q: search_query,
       key: ACCESS_KEY,
@@ -32,13 +32,13 @@ const SearchContainer = () => {
   if (!items) return null;
 
   const next = () => {
-    if (items.length > 0) {
+    if (!nextPageToken) {
       getSearchResult();
     }
   };
   return (
     <Container className={cn({ sidebar })}>
-      <InfiniteScroll next={next} hasMore>
+      <InfiniteScroll next={next}>
         <SearchResults data={items} />
       </InfiniteScroll>
     </Container>

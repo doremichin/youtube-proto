@@ -4,7 +4,7 @@ export const useIntersection = () => {
   const [isInView, setInView] = useState(false);
   const ref = useRef();
   const options = {
-    rootMargin: '0px',
+    rootMargin: '0px 0px 300px 0px',
     threshold: 0,
   };
 

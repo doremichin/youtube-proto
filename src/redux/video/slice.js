@@ -32,11 +32,15 @@ const videoSlice = createSlice({
     setNewVideoList: (state, { payload }) => {
       state.list = payload;
     },
+    getVideoStatistics: () => {},
+    setVideoStatistics: (state, { payload }) => {
+      state[payload.id] = payload.data;
+    },
   },
 });
 
 export default videoSlice.reducer;
 export const {
-  getVideoById, setVideoById, getVideoList, setVideoList, getVideoComments, setVideoComments, getNewVideoList, setNewVideoList,
+  getVideoById, setVideoById, getVideoList, setVideoList, getVideoComments, setVideoComments, getNewVideoList, setNewVideoList, getVideoStatistics, setVideoStatistics,
 } = videoSlice.actions;
 export const selectVideo = (state) => state.video;
