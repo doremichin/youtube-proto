@@ -6,9 +6,12 @@ const searchSlice = createSlice({
     data: {
       items: [],
     },
+    relatedVideos: {
+      items: [],
+    },
   },
   reducers: {
-    getSearchResults: (state) => {},
+    getSearchResults: () => {},
     setSearchResults: (state, { payload }) => {
       state.data = {
         ...payload,
@@ -18,9 +21,22 @@ const searchSlice = createSlice({
         ],
       };
     },
+    getRelatedVideos: () => {},
+    setRelatedVideos: (state, { payload }) => {
+      state.relatedVideos = {
+        ...payload,
+        items: [
+          ...state.relatedVideos.items,
+          ...payload.items,
+        ],
+      };
+    },
+
   },
 });
 
 export default searchSlice.reducer;
-export const searchActions = searchSlice.actions;
+export const {
+  getSearchResults, setSearchResults, getRelatedVideos, setRelatedVideos,
+} = searchSlice.actions;
 export const selectSearchData = (state) => state.search.data;

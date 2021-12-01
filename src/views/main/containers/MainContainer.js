@@ -52,7 +52,7 @@ const MainContainer = () => {
   return (
     <Container className={cn({ sidebar })}>
       <MainCategoryLnbContainer />
-      <InfiniteScroll next={next} hasMore={items?.length < 100}>
+      <InfiniteScroll next={next}>
         <VideoList items={items} />
       </InfiniteScroll>
     </Container>

@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getVideoStatistics } from '../../../../redux/video/slice';
+import { ACCESS_KEY } from '../../../../const/config';
+import { dateCalculate, viewCalculate } from '../../../../lib/utils';
 
 const SearchItem = ({
   item, onClick, channels, channelId,
 }) => {
   if (!item?.snippet || !channels[channelId]) return null;
+  const dispatch = useDispatch();
+  const videoStatus = useSelector((state) => state?.video?.[item.id.videoId]?.items[0]);
+  const getVideoStatus = () => {
+    dispatch(getVideoStatistics({
+      part: 'statistics,snippet',
+      key: ACCESS_KEY,
+      id: item.id.videoId,
+    }));
+  };
+  const publishedDate = videoStatus?.snippet?.publishedAt;
+  const gapToCurrentDay = dateCalculate(publishedDate);
+  const viewCount = Number(videoStatus?.statistics?.viewCount);
+  const views = viewCalculate(viewCount);
+  useEffect(() => {
+    getVideoStatus();
+  }, []);
   return (
     <Container onClick={onClick}>
       <Thumb>
@@ -14,6 +35,10 @@ const SearchItem = ({
       </Thumb>
       <Content>
         <Title>{item.snippet.title}</Title>
+        <Static>
+          <span>조회수 {views}회</span>&nbsp;·&nbsp;
+          <span>{gapToCurrentDay}</span>
+        </Static>
         <Channel>
           <ChannelThumb>
             <img src={channels[channelId].items[0].snippet.thumbnails.medium.url} alt="" />
@@ -23,6 +48,7 @@ const SearchItem = ({
           </ChannelTitle>
         </Channel>
         <Desc>{item.snippet.description}</Desc>
+
       </Content>
     </Container>
   );
@@ -77,5 +103,13 @@ const ChannelTitle = styled.div`
 const Desc = styled.p`
   font-size: 12px;
   color: #aaa;
+`;
+const Static = styled.div`
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #aaa;
+  span{
+    display: inline-block;
+  }
 `;
 export default React.memo(SearchItem);
