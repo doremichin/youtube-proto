@@ -13,7 +13,7 @@ const LoginButton = () => {
     dispatch(setUserInfo(profile));
   };
   const onFailure = (err) => {
-    console.log(err);
+    throw error(err);
   };
   const { signIn, loaded } = useGoogleLogin({
     onSuccess,
