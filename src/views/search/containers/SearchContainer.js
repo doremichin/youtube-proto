@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
-import cn from 'classnames';
 
 import { getSearchResults } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
@@ -13,7 +12,6 @@ import InfiniteScroll from '../../shared/components/InfiniteScroll';
 const SearchContainer = () => {
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const sidebar = useSelector((state) => state.app.sidebar);
   const { items, nextPageToken } = useSelector((state) => state.search.data);
   const { search_query } = qs.parse(search, { ignoreQueryPrefix: true });
   const getSearchResult = () => {
@@ -37,7 +35,7 @@ const SearchContainer = () => {
     }
   };
   return (
-    <Container className={cn({ sidebar })}>
+    <Container>
       <InfiniteScroll next={next}>
         <SearchResults data={items} />
       </InfiniteScroll>
@@ -46,14 +44,8 @@ const SearchContainer = () => {
 };
 
 const Container = styled.div`
-  position: absolute;
-  top: 56px;
-  left: 72px;
-  right: 0;
-  padding-top: 30px;
-  &.sidebar{
-    left: 240px;
-  }
+  padding-top: 86px;
+  margin: 0 auto;
 `;
 
 export default SearchContainer;

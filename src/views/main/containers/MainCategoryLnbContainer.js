@@ -33,9 +33,7 @@ const MainCategoryLnbContainer = () => {
   if (!items) return null;
   return (
     <Container>
-      <Grid>
-        <ScrollMenu data={items} renderItem={renderItem} />
-      </Grid>
+      <ScrollMenu data={items} renderItem={renderItem} />
     </Container>
   );
 };
@@ -46,15 +44,9 @@ const Container = styled.div`
   border-top: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 `;
-const Grid = styled.div`
-  margin: 0 auto;
-  max-width: 1300px;
-`;
+
 const NavItem = styled.div`
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
   padding: 8px 12px;
   font-size: 14px;

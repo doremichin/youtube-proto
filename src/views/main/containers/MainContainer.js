@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import cn from 'classnames';
 
 import { getNewVideoList, getVideoList } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
@@ -10,7 +9,6 @@ import InfiniteScroll from '../../shared/components/InfiniteScroll';
 import MainCategoryLnbContainer from './MainCategoryLnbContainer';
 
 const MainContainer = () => {
-  const sidebar = useSelector((state) => state.app.sidebar);
   const dispatch = useDispatch();
   const { items, nextPageToken } = useSelector((state) => state.video.list);
   const videoCategoryId = useSelector((state) => state.channels.selectedCategoryId);
@@ -50,7 +48,7 @@ const MainContainer = () => {
   if (!items) return null;
 
   return (
-    <Container className={cn({ sidebar })}>
+    <Container>
       <MainCategoryLnbContainer />
       <InfiniteScroll next={next}>
         <VideoList items={items} />
@@ -60,13 +58,7 @@ const MainContainer = () => {
 };
 
 const Container = styled.div`
-  position: absolute;
-  left: 72px;
-  top: 56px;
-  right: 0;
-  &.sidebar{
-    left: 240px;
-  }
+  padding-top: 56px;
 `;
 
 export default MainContainer;

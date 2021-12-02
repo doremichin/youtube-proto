@@ -62,15 +62,15 @@ const Bottom = styled.div`
 const Left = styled.div`
   margin-right: 10px;
 `;
+const Right = styled.div`
+
+`;
 const ChannelThumb = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 50%;
   overflow: hidden;
   background: #333;
-`;
-const Right = styled.div`
-  
 `;
 const Title = styled.p`
   color: #fff;

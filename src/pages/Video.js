@@ -2,19 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import VideoContainer from '../views/video/containers/VideoContainer';
+import SidebarSlideContainer from '../views/shared/containers/SidebarSlideContainer';
 
 const Video = () => (
   <Container>
+    <SidebarSlideContainer />
     <VideoContainer />
   </Container>
 );
 
 const Container = styled.div`
-  position: absolute;
-  z-index: -1;
-  top: 56px;
-  left: 0;
-  right: 0;
+  padding-top: 56px;
   display: flex;
 `;
 
