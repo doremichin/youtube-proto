@@ -10,19 +10,19 @@ const SidebarContainer = () => {
   const sidebar = useSelector((state) => state.app.sidebar);
   return (
     <Container>
-      <SidebarPopup view={sidebar} />
-      <Route exact path={['/', '/results']}>
-        <SidebarStatic />
-      </Route>
-
+      {
+            sidebar
+              ? <SidebarPopup view={sidebar} />
+              : <Route exact path={['/', '/results']}><SidebarStatic /></Route>
+        }
     </Container>
   );
 };
 
 const Container = styled.div`
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 56px;
-  left: 0;
 `;
 
 export default SidebarContainer;

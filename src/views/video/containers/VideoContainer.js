@@ -47,7 +47,7 @@ const VideoContainer = () => {
 
 const Container = styled.div`
   margin: 20px auto 0;
-  max-width: 1750px;
+  max-width: 1700px;
   display: flex;
 `;
 

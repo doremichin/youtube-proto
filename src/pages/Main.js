@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MainContainer from '../views/main/containers/MainContainer';
+import SidebarContainer from '../views/shared/containers/SidebarContainer';
 
 const Main = () => (
   <Container>
+    <SidebarContainer />
     <MainContainer />
   </Container>
 );

@@ -24,65 +24,62 @@ const ScrollMenu = ({ data, renderItem }) => {
   return (
     <Container>
       {
-            !start
-            && (
-            <>
-              <Fog left />
-              <Arrow left onClick={ClickLeft}>
-                <IconScrollChevronLeft />
-              </Arrow>
-            </>
-            )
-        }
+        !start
+        && (
+        <>
+          <Fog left />
+          <Arrow left onClick={ClickLeft}>
+            <IconScrollChevronLeft />
+          </Arrow>
+        </>
+        )
+      }
       <Track onScroll={handleScroll} ref={trackRef}>
-        <Nav>
-          {renderItem()}
-          {
-            data.map((item, index) => renderItem(item, index))
-          }
-        </Nav>
+        {renderItem()}
+        {
+          data.map((item, index) => renderItem(item, index))
+        }
       </Track>
       {
-            !end
-            && (
-            <>
-              <Arrow right onClick={ClickRight}>
-                <IconScrollChevronRight />
-              </Arrow>
-              <Fog right />
-            </>
-            )
-        }
-
+        !end
+        && (
+        <>
+          <Fog right />
+          <Arrow right onClick={ClickRight}>
+            <IconScrollChevronRight />
+          </Arrow>
+        </>
+        )
+      }
     </Container>
   );
 };
 
 const Container = styled.div`
   padding: 0 50px;
-  margin: 0 auto;
   position: relative;
+  display: flex;
+  align-items: center;
 `;
 const Track = styled.div`
   overflow-x: auto;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-const Nav = styled.div`
   display: flex;
-
+  @media ${(props) => props.theme.tablet} {
+    
+  }
 `;
+
 const Fog = styled.div`
   width: 50px;
   position: absolute;
   top: 0;
   bottom: 0;
-
   ${(props) => props.left && css`
     left: 50px;
     background-image: linear-gradient(to right, rgba(33, 33, 33, 0.98) 20%, rgba(33, 33, 33, 0) 80%);

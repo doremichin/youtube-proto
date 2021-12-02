@@ -7,63 +7,61 @@ import {
 } from '../../../../icons';
 import LoginButton from '../Button/LoginButton';
 
-const SidebarPopup = ({ view }) => {
-  const a = 1;
-  return (
-    <Container className={cn({ view })}>
-      <List>
-        <ListItem>
-          <IconWrapper>
-            <IconHome />
-          </IconWrapper>
-          <span>홈</span>
-        </ListItem>
-        <ListItem>
-          <IconWrapper>
-            <IconCompass />
-          </IconWrapper>
-          <span>탐색</span>
-        </ListItem>
-        <ListItem>
-          <IconWrapper>
-            <IconSubscribe />
-          </IconWrapper>
-          <span>구독</span>
-        </ListItem>
-      </List>
-      <List>
-        <ListItem>
-          <IconWrapper>
-            <IconStorage />
-          </IconWrapper>
-          <span>보관함</span>
-        </ListItem>
-        <ListItem>
-          <IconWrapper>
-            <IconClock />
-          </IconWrapper>
-          <span>시청 기록</span>
-        </ListItem>
-      </List>
-      <ListLogin>
-        <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
-        <LoginButton />
-      </ListLogin>
-    </Container>
-  );
-};
+const SidebarPopup = ({ view }) => (
+  <Container className={cn({ view })}>
+    <List>
+      <ListItem>
+        <IconWrapper>
+          <IconHome />
+        </IconWrapper>
+        <span>홈</span>
+      </ListItem>
+      <ListItem>
+        <IconWrapper>
+          <IconCompass />
+        </IconWrapper>
+        <span>탐색</span>
+      </ListItem>
+      <ListItem>
+        <IconWrapper>
+          <IconSubscribe />
+        </IconWrapper>
+        <span>구독</span>
+      </ListItem>
+    </List>
+    <List>
+      <ListItem>
+        <IconWrapper>
+          <IconStorage />
+        </IconWrapper>
+        <span>보관함</span>
+      </ListItem>
+      <ListItem>
+        <IconWrapper>
+          <IconClock />
+        </IconWrapper>
+        <span>시청 기록</span>
+      </ListItem>
+    </List>
+    <ListLogin>
+      <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
+      <LoginButton />
+    </ListLogin>
+  </Container>
+);
 
 const Container = styled.div`
-  position: fixed;
+  overflow: hidden;
+  position: -webkit-sticky;
+  position: sticky;
   z-index: 10;
   top: 56px;
-  width: 240px;
-  left: -100%;
-
+  width: 0px;
   height: 100vh;
   background: rgba(33, 33, 33, 0.98);
   &.view{
-    left: 0;
+    width: 240px;
+    overflow: auto;
   }
 `;
 const List = styled.ul`

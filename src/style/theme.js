@@ -1,8 +1,8 @@
 const size = {
-  mobile: '800px',
-  tablet: '1200px',
-  laptop: '1600px',
-  desktop: '1800px',
+  mobile: '650px',
+  tablet: '950px',
+  laptop: '1200px',
+  desktop: '1700px',
 };
 
 const theme = {

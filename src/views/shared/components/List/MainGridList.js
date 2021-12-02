@@ -16,7 +16,6 @@ const MainGridList = ({ data = [], renderItem }) => (
 );
 
 const Container = styled.div`
-
 `;
 const Row = styled.div`
   display: flex;
@@ -24,20 +23,20 @@ const Row = styled.div`
   margin: 0 -10px;
 `;
 const Col = styled.div`
-  width: 16.6%;
+  width: 20%;
   padding: 0 10px;
   margin-bottom: 40px;
   @media ${(props) => props.theme.desktop} {
-    width: 20%;
-  }
-  @media ${(props) => props.theme.laptop} {
     width: 25%;
   }
+  @media ${(props) => props.theme.laptop} {
+    width: 33.33%;
+  }
   @media ${(props) => props.theme.tablet} {
-    width: 33.3%;
+    width: 50%;
   }
   @media ${(props) => props.theme.mobile} {
-    width: 50%;
+    width: 100%;
   }
 `;
 
