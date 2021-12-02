@@ -35,10 +35,12 @@ const ScrollMenu = ({ data, renderItem }) => {
         )
       }
       <Track onScroll={handleScroll} ref={trackRef}>
-        {renderItem()}
-        {
-          data.map((item, index) => renderItem(item, index))
-        }
+        <Nav>
+          {renderItem()}
+          {
+            data.map((item, index) => renderItem(item, index))
+          }
+        </Nav>
       </Track>
       {
         !end
@@ -56,12 +58,13 @@ const ScrollMenu = ({ data, renderItem }) => {
 };
 
 const Container = styled.div`
+  max-width: 1000px;
   padding: 0 50px;
+  margin: 0 auto;
   position: relative;
-  display: flex;
-  align-items: center;
 `;
 const Track = styled.div`
+
   overflow-x: auto;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
@@ -69,12 +72,11 @@ const Track = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  display: flex;
-  @media ${(props) => props.theme.tablet} {
-    
-  }
 `;
+const Nav = styled.div`
+  display: flex;
 
+`;
 const Fog = styled.div`
   width: 50px;
   position: absolute;
