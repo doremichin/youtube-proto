@@ -59,6 +59,7 @@ const MainContainer = () => {
 
 const Container = styled.div`
   padding-top: 56px;
+  overflow: auto;
 `;
 
 export default MainContainer;

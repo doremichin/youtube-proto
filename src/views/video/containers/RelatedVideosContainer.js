@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 
 import { ACCESS_KEY } from '../../../const/config';
-import { getRelatedVideos } from '../../../redux/search/slice';
+import { getNextRelatedVideos, getRelatedVideos } from '../../../redux/search/slice';
 import RelatedVideoItemContainer from './RelatedVideoItemContainer';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
 
@@ -14,24 +14,34 @@ const RelatedVideosContainer = () => {
   const { v } = qs.parse(search, { ignoreQueryPrefix: true });
   const dispatch = useDispatch();
   const { items, nextPageToken } = useSelector((state) => state.search.relatedVideos);
-  const getRelatedVideoList = () => {
+  const getNewRelatedVideoList = () => {
     dispatch(getRelatedVideos({
       part: 'snippet',
       key: ACCESS_KEY,
       relatedToVideoId: v,
-      maxResults: 15,
+      maxResults: 25,
+      type: 'video',
+    }));
+  };
+  const getNextRelatedVideoList = () => {
+    dispatch(getNextRelatedVideos({
+      part: 'snippet',
+      key: ACCESS_KEY,
+      relatedToVideoId: v,
+      maxResults: 20,
       type: 'video',
       pageToken: nextPageToken,
     }));
   };
 
   const next = () => {
-    if (!nextPageToken) {
-      getRelatedVideoList();
+    if (items.length > 0) {
+      getNextRelatedVideoList();
     }
   };
+
   useEffect(() => {
-    getRelatedVideoList();
+    getNewRelatedVideoList();
   }, [v]);
 
   if (!items) return null;
