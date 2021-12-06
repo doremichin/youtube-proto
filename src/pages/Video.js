@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import VideoContainer from '../views/video/containers/VideoContainer';
-import SidebarSlideContainer from '../views/shared/containers/SidebarSlideContainer';
+import SidebarSlideContainer from '../views/shared/containers/Sidebar/SidebarSlideContainer';
 import ModalPortal from '../lib/ModalPortal';
 
 const Video = () => (
