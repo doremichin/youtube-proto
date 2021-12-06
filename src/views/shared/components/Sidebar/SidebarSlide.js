@@ -65,7 +65,7 @@ const SidebarSlide = ({ isView, handleClick }) => (
 
 const Container = styled.div`
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -127,7 +127,7 @@ const IconWrapper = styled.div`
 `;
 const Screen = styled.div`
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   right: 0;
