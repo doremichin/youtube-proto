@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +11,14 @@ const SidebarSlideContainer = () => {
   const handleClick = () => {
     dispatch(toggleSidebar(!isView));
   };
+  useEffect(() => {
+    if (isView) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isView]);
+
   return (
     <Container>
       <SidebarSlide isView={isView} handleClick={handleClick} />
