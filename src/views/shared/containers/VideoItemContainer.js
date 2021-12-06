@@ -34,4 +34,4 @@ const VideoItemContainer = ({ item }) => {
 const Container = styled.div`
 `;
 
-export default VideoItemContainer;
+export default React.memo(VideoItemContainer);
