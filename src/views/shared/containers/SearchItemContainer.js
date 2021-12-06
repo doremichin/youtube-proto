@@ -5,12 +5,14 @@ import { useHistory } from 'react-router-dom';
 
 import SearchItem from '../components/Item/SearchItem';
 import { toggleSidebar } from '../../../redux/app/slice';
-import { getChannelsData, selectChannels } from '../../../redux/channels/slice';
+import { getChannelsData } from '../../../redux/channels/slice';
 import { ACCESS_KEY } from '../../../const/config';
 
 const SearchItemContainer = ({ item }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const channels = useSelector((state) => state.channels);
+
   const id = item.snippet.channelId;
   const clickVideo = () => {
     dispatch(toggleSidebar(false));
@@ -23,7 +25,6 @@ const SearchItemContainer = ({ item }) => {
       id,
     }));
   }, []);
-  const channels = useSelector(selectChannels);
   return (
     <Container>
       <SearchItem item={item} onClick={clickVideo} channels={channels} channelId={id} />
