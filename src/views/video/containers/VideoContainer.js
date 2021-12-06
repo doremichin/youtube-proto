@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 import { getVideoById } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
@@ -17,6 +18,7 @@ const VideoContainer = () => {
   const { v } = qs.parse(search, { ignoreQueryPrefix: true });
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.video);
+  const isLaptopOrDesktop = useMediaQuery({ minWidth: 1200 });
 
   useEffect(() => {
     dispatch(getVideoById({
@@ -36,10 +38,17 @@ const VideoContainer = () => {
         <RelatedDetailSection>
           <VideoDetailInfo data={data?.items?.[0]} />
           <VideoChannelInfo />
+          {
+            !isLaptopOrDesktop
+              && <RelatedVideosContainer isLaptopOrDesktop={false} />
+          }
           <CommentsContainer id={v} commentCount={data?.items?.[0].statistics.commentCount} />
         </RelatedDetailSection>
       </SectionContainer>
-      <RelatedVideosContainer />
+      {
+        isLaptopOrDesktop
+          && <RelatedVideosContainer isLaptopOrDesktop />
+      }
     </Container>
 
   );
