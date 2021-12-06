@@ -17,7 +17,7 @@ const VideoContainer = () => {
   const { search } = useLocation();
   const { v } = qs.parse(search, { ignoreQueryPrefix: true });
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.video);
+  const data = useSelector((state) => state.video.data);
   const isLaptopOrDesktop = useMediaQuery({ minWidth: 1200 });
 
   useEffect(() => {

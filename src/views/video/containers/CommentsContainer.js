@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import VideoComments from '../components/VideoComments';
-import { getVideoComments, selectVideo } from '../../../redux/video/slice';
+import { getVideoComments } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
 
 const CommentsContainer = ({ id, commentCount }) => {
   const dispatch = useDispatch();
-  const { comments } = useSelector(selectVideo);
+  const comments = useSelector((state) => state.video.comments);
   const [getComments, setComments] = useState(20);
   useEffect(() => {
     dispatch(getVideoComments({
