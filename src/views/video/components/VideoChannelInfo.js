@@ -37,7 +37,9 @@ const VideoChannelInfo = () => {
         <SubscribeCount>
           구독자 {viewCalculate(channelData?.items?.[0]?.statistics?.subscriberCount)}
         </SubscribeCount>
-        <ChannelDesc dangerouslySetInnerHTML={{ __html: description }} className={cn({ detail })} />
+        <ChannelDesc className={cn({ detail })}>
+          {description}
+        </ChannelDesc>
         <DetailToggle onClick={clickDetail}>
           {detail ? '간략히' : '더보기'}
         </DetailToggle>
@@ -77,8 +79,9 @@ const SubscribeCount = styled.div`
   color: #aaa;
   margin-bottom: 10px;
 `;
-const ChannelDesc = styled.div`
+const ChannelDesc = styled.p`
   width: 50%;
+  white-space: pre-line;
   &.detail{
     display: block;
     overflow: visible;

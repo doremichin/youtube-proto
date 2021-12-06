@@ -30,7 +30,7 @@ const SearchContainer = () => {
   if (!items) return null;
 
   const next = () => {
-    if (!nextPageToken) {
+    if (items.length > 0) {
       getSearchResult();
     }
   };

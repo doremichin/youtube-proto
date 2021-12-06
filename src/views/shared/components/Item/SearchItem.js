@@ -48,7 +48,6 @@ const SearchItem = ({
           </ChannelTitle>
         </Channel>
         <Desc>{item.snippet.description}</Desc>
-
       </Content>
     </Container>
   );

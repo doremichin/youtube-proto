@@ -3,23 +3,20 @@ import styled from 'styled-components';
 
 import SubscribeButton from '../Button/SubscribeButton';
 
-const SubscribeItem = ({ item }) => {
-  const a = 1;
-  return (
-    <Container>
-      <Thumb>
-        <Image>
-          <img src={item.snippet.thumbnails.medium.url} alt="" />
-        </Image>
-      </Thumb>
-      <Content>
-        <Title>{item.snippet.title}</Title>
-        <Desc>{item.snippet.description}</Desc>
-      </Content>
-      <SubscribeButton />
-    </Container>
-  );
-};
+const SubscribeItem = ({ item }) => (
+  <Container>
+    <Thumb>
+      <Image>
+        <img src={item.snippet.thumbnails.medium.url} alt="" />
+      </Image>
+    </Thumb>
+    <Content>
+      <Title>{item.snippet.title}</Title>
+      <Desc>{item.snippet.description}</Desc>
+    </Content>
+    <SubscribeButton />
+  </Container>
+);
 
 const Container = styled.div`
   height: 200px;
