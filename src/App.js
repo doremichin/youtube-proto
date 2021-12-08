@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import Routes from './Routes';
 import { GlobalStyle } from './style/GlobalStyle';
-import HeaderContainer from './views/shared/containers/HeaderContainer';
+import Header from './views/shared/components/Header';
 
 const App = () => (
   <Container>
     <GlobalStyle />
-    <HeaderContainer />
+    <Header />
     <Routes />
   </Container>
 );

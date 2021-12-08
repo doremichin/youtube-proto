@@ -1,48 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 import {
-  IconApp, IconLogo, IconSettingDot,
+  IconApp, IconLogo, IconSearch, IconSettingDot,
 } from '../../../../icons';
 import SearchBoxContainer from '../../containers/SearchBoxContainer';
 import LoginButton from '../Button/LoginButton';
 import UserInfo from './UserInfo';
 import MenuButton from '../Button/MenuButton';
 import { toggleSidebar } from '../../../../redux/app/slice';
+import SearchBoxInMobile from '../SearchBox/SearchBoxInMobile';
+import Contain from '../Common/Contain';
 
 const Header = () => {
+  const { search } = useLocation();
+  const [isView, setView] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const sidebar = useSelector((state) => state.app.sidebar);
-  const toggle = () => {
+  const isViewSidebar = () => {
     dispatch(toggleSidebar(!sidebar));
   };
+  const isViewSearchBox = () => {
+    setView((p) => !p);
+  };
+  const isMobile = useMediaQuery({ maxWidth: 700 });
+  useEffect(() => {
+    setView(false);
+  }, [search]);
   return (
     <Container>
       <Left>
-        <MenuButton toggle={toggle} />
+        <MenuButton toggle={isViewSidebar} />
 
         <Logo to="/">
           <IconLogo />
         </Logo>
       </Left>
-      <Center>
-        <SearchBoxContainer />
-      </Center>
+      {
+            !isMobile
+            && <Center><SearchBoxContainer /></Center>
+        }
+      {
+            isView
+            && <Contain onClickOut={isViewSearchBox}><SearchBoxInMobile onClick={isViewSearchBox} /></Contain>
+        }
       <Right>
         <ButtonGroup>
-          <ButtonApp>
-            <IconApp />
-          </ButtonApp>
-          <ButtonSetting>
-            <IconSettingDot />
-          </ButtonSetting>
           {
-                user
-                  ? <UserInfo user={user} /> : <LoginButton />
+                isMobile
+                && <Button onClick={isViewSearchBox}><IconSearch /></Button>
             }
+          <Button>
+            <IconApp />
+          </Button>
+          <Button>
+            <IconSettingDot />
+          </Button>
+          <LoginBox>
+            {
+                    user
+                      ? <UserInfo user={user} /> : <LoginButton />
+                }
+          </LoginBox>
         </ButtonGroup>
       </Right>
     </Container>
@@ -67,8 +90,8 @@ const Left = styled.div`
 `;
 const Center = styled.div`
   margin: 0 60px;
-  max-width: 800px;
   width: 100%;
+  
 `;
 const Right = styled.div`
 `;
@@ -83,18 +106,14 @@ const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
 `;
-const ButtonApp = styled.div`
+const Button = styled.div`
+  cursor: pointer;
   padding: 8px;
   width: 40px;
   height: 40px;
   fill: #fff;
 `;
-const ButtonSetting = styled.div`
-  padding: 8px;
-  width: 40px;
-  height: 40px;
-  fill: #fff;
-  margin-right: 8px;
+const LoginBox = styled.div`
+  margin-left: 4px;
 `;
-
 export default React.memo(Header);
