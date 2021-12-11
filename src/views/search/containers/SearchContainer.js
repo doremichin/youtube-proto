@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getSearchResults } from '../../../redux/search/slice';
+import { getNextSearchResults, getSearchResults } from '../../../redux/search/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import SearchResults from '../components/SearchResults';
 import InfiniteScroll from '../../shared/components/InfiniteScroll';
@@ -20,6 +20,14 @@ const SearchContainer = () => {
       q: search_query,
       key: ACCESS_KEY,
       maxResults: 10,
+    }));
+  };
+  const getNextSearchResult = () => {
+    dispatch(getNextSearchResults({
+      part: 'snippet',
+      q: search_query,
+      key: ACCESS_KEY,
+      maxResults: 10,
       pageToken: nextPageToken,
     }));
   };
@@ -31,7 +39,7 @@ const SearchContainer = () => {
 
   const next = () => {
     if (items.length > 0) {
-      getSearchResult();
+      getNextSearchResult();
     }
   };
   return (
