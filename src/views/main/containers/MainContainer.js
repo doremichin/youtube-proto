@@ -23,7 +23,7 @@ const MainContainer = () => {
       videoCategoryId,
     }));
   };
-  const getNewCategoryVideos = () => {
+  const getVideosByCategory = () => {
     dispatch(getNewVideoList({
       part: 'snippet,statistics,contentDetails',
       chart: 'mostPopular',
@@ -37,7 +37,7 @@ const MainContainer = () => {
     getVideos();
   }, []);
   useEffect(() => {
-    getNewCategoryVideos();
+    getVideosByCategory();
   }, [videoCategoryId]);
 
   const next = () => {

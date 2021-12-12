@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchGridList = ({ data = [], searchItem = () => {}, subscribeItem = () => {} }) => {
-  const a = 1;
-  return (
-    <Container>
-      <Row>
-        {
+const SearchGridList = ({ data = [], searchItem = () => {}, subscribeItem = () => {} }) => (
+  <Container>
+    <Row>
+      {
                 data.map((item, index) => {
                   if (item.id.kind === 'youtube#channel') {
                     return (
@@ -25,10 +23,9 @@ const SearchGridList = ({ data = [], searchItem = () => {}, subscribeItem = () =
                   return null;
                 })
             }
-      </Row>
-    </Container>
-  );
-};
+    </Row>
+  </Container>
+);
 
 const Container = styled.div`
 

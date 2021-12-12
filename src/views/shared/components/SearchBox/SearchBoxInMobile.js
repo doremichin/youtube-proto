@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SearchBoxContainer from '../../containers/SearchBoxContainer';
+import SearchBoxContainer from '../../containers/SearchBox/SearchBoxContainer';
 import { IconArrowLeft, IconMicrophone } from '../../../../icons';
 
 const SearchBoxInMobile = ({ onClick }) => (

@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import cn from 'classnames';
 
-import { getChannelsData } from '../../../redux/channels/slice';
-import { ACCESS_KEY } from '../../../const/config';
-import SubscribeButton from '../../shared/components/Button/SubscribeButton';
-import { viewCalculate } from '../../../lib/utils';
+import { getChannelsData } from '../../../../redux/channels/slice';
+import { ACCESS_KEY } from '../../../../const/config';
+import SubscribeButton from '../../../shared/components/Button/SubscribeButton';
+import { viewCalculate } from '../../../../lib/utils';
+import ChannelDescription from '../../components/ChannelDetail/ChannelDescription';
 
-const VideoChannelInfo = () => {
+const ChannelDetailContainer = () => {
   const dispatch = useDispatch();
   const { description, channelId } = useSelector((state) => state.video.data?.items?.[0].snippet);
   const channelData = useSelector((state) => state.channels[channelId]);
-  const [detail, setDetail] = useState(false);
-  const clickDetail = () => {
-    setDetail((p) => !p);
-  };
   useEffect(() => {
     dispatch(getChannelsData({
       part: 'snippet,contentDetails,statistics',
@@ -37,12 +33,7 @@ const VideoChannelInfo = () => {
         <SubscribeCount>
           구독자 {viewCalculate(channelData?.items?.[0]?.statistics?.subscriberCount)}
         </SubscribeCount>
-        <ChannelDesc className={cn({ detail })}>
-          {description}
-        </ChannelDesc>
-        <DetailToggle onClick={clickDetail}>
-          {detail ? '간략히' : '더보기'}
-        </DetailToggle>
+        <ChannelDescription data={description} />
       </Desc>
       <SubscribeButton />
     </Container>
@@ -79,23 +70,5 @@ const SubscribeCount = styled.div`
   color: #aaa;
   margin-bottom: 10px;
 `;
-const ChannelDesc = styled.p`
-  width: 50%;
-  white-space: pre-line;
-  &.detail{
-    display: block;
-    overflow: visible;
-  }
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-const DetailToggle = styled.span`
-  display: inline-block;
-  padding-top: 10px;
-  font-size: 12px;
-  color: #aaa;
-  cursor: pointer;
-`;
-export default VideoChannelInfo;
+
+export default ChannelDetailContainer;

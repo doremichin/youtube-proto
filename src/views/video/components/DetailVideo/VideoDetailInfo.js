@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { transDate } from '../../../lib/utils';
-import { DefaultButton } from '../../shared/components/Button/Button.styled';
+import { transDate } from '../../../../lib/utils';
+import { DefaultButton } from '../../../shared/components/Button/Button.styled';
 import {
   IconClipping, IconDisLike, IconHorizonDots, IconLike, IconShare, IconStorageAdd,
-} from '../../../icons';
+} from '../../../../icons';
 
 const VideoDetailInfo = ({ data }) => {
   const tags = [];

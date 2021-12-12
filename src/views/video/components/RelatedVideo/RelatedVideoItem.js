@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-import { dateCalculate, viewCalculate } from '../../../lib/utils';
+import { dateCalculate, viewCalculate } from '../../../../lib/utils';
 
 const RelatedVideoItem = ({ item }) => {
   const videoStatus = useSelector((state) => state?.video?.[item.id.videoId]?.items[0]);

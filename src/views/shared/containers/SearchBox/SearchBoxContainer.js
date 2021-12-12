@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import SearchBox from '../components/SearchBox';
+import SearchBox from '../../components/SearchBox';
 
 const SearchBoxContainer = () => {
   const [query, setQuery] = useState('');
