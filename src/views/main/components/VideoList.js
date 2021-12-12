@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MainGridList from '../../shared/components/List/MainGridList';
-import VideoItemContainer from '../../shared/containers/VideoItemContainer';
+import VideoItemContainer from '../../shared/containers/Item/VideoItemContainer';
 
 const VideoList = ({ items }) => {
   const renderItem = (item) => <VideoItemContainer item={item} />;

@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import {
   IconApp, IconLogo, IconSearch, IconSettingDot,
 } from '../../../../icons';
-import SearchBoxContainer from '../../containers/SearchBoxContainer';
+import SearchBoxContainer from '../../containers/SearchBox/SearchBoxContainer';
 import LoginButton from '../Button/LoginButton';
 import UserInfo from './UserInfo';
 import MenuButton from '../Button/MenuButton';

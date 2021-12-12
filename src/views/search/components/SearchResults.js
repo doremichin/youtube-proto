@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SubscribeItem from '../../shared/components/Item/SubscribeItem';
+import SubscribeItem from '../../shared/components/Item/SubscribeChannelItem';
 import SearchGridList from '../../shared/components/List/SearchGridList';
-import SearchItemContainer from '../../shared/containers/SearchItemContainer';
+import SearchItemContainer from '../../shared/containers/Item/SearchItemContainer';
 
 const SearchResults = ({ data = [] }) => {
   const searchItem = (item) => <SearchItemContainer item={item} />;

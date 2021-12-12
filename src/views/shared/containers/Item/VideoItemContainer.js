@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { toggleSidebar } from '../../../redux/app/slice';
-import { getChannelsData } from '../../../redux/channels/slice';
-import { ACCESS_KEY } from '../../../const/config';
-import VideoItem from '../components/Item/VideoItem';
+import { toggleSidebar } from '../../../../redux/app/slice';
+import { getChannelsData } from '../../../../redux/channels/slice';
+import { ACCESS_KEY } from '../../../../const/config';
+import VideoItem from '../../components/Item/VideoItem';
 
 const VideoItemContainer = ({ item }) => {
   const dispatch = useDispatch();

@@ -5,10 +5,10 @@ import { useLocation } from 'react-router-dom';
 import qs from 'qs';
 import cn from 'classnames';
 
-import { ACCESS_KEY } from '../../../const/config';
-import { getNextRelatedVideos, getRelatedVideos } from '../../../redux/search/slice';
+import { ACCESS_KEY } from '../../../../const/config';
+import { getNextRelatedVideos, getRelatedVideos } from '../../../../redux/search/slice';
 import RelatedVideoItemContainer from './RelatedVideoItemContainer';
-import InfiniteScroll from '../../shared/components/InfiniteScroll';
+import InfiniteScroll from '../../../shared/components/InfiniteScroll';
 
 const RelatedVideosContainer = ({ isLaptopOrDesktop }) => {
   const { search } = useLocation();

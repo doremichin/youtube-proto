@@ -8,10 +8,11 @@ import { useMediaQuery } from 'react-responsive';
 import { getVideoById } from '../../../redux/video/slice';
 import { ACCESS_KEY } from '../../../const/config';
 import { SectionContainer } from '../../shared/components/Layout/Layout.styled';
-import VideoDetailInfo from '../components/VideoDetailInfo';
-import CommentsContainer from './CommentsContainer';
-import VideoChannelInfo from '../components/VideoChannelInfo';
-import RelatedVideosContainer from './RelatedVideosContainer';
+import VideoDetailInfo from '../components/DetailVideo/VideoDetailInfo';
+import CommentsContainer from './Comments/CommentsContainer';
+import ChannelDetailContainer from './ChannelDetail/ChannelDetailContainer';
+import RelatedVideosContainer from './RelatedVideo/RelatedVideosContainer';
+import VideoPlayer from '../components/DetailVideo/VideoPlayer';
 
 const VideoContainer = () => {
   const { search } = useLocation();
@@ -32,18 +33,16 @@ const VideoContainer = () => {
   return (
     <Container>
       <SectionContainer>
-        <VideoSection>
-          <Video dangerouslySetInnerHTML={{ __html: data?.items?.[0].player.embedHtml }} />
-        </VideoSection>
-        <RelatedDetailSection>
+        <VideoPlayer data={data?.items?.[0]} />
+        <VideoDetailInfoSection>
           <VideoDetailInfo data={data?.items?.[0]} />
-          <VideoChannelInfo />
+          <ChannelDetailContainer />
           {
             !isLaptopOrDesktop
               && <RelatedVideosContainer isLaptopOrDesktop={false} />
           }
           <CommentsContainer id={v} commentCount={data?.items?.[0].statistics.commentCount} />
-        </RelatedDetailSection>
+        </VideoDetailInfoSection>
       </SectionContainer>
       {
         isLaptopOrDesktop
@@ -60,22 +59,7 @@ const Container = styled.div`
   display: flex;
 `;
 
-const VideoSection = styled.div`
-  padding-bottom: 56%;
-  position: relative;
-`;
-const Video = styled.div`
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  iframe{
-    width: 100%;
-    height: 100%;
-  }
-`;
-const RelatedDetailSection = styled.div`
+const VideoDetailInfoSection = styled.div`
   
 `;
 export default VideoContainer;

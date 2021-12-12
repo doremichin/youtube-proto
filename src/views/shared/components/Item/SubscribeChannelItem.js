@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import SubscribeButton from '../Button/SubscribeButton';
 
-const SubscribeItem = ({ item }) => (
+const SubscribeChannelItem = ({ item }) => (
   <Container>
     <Thumb>
       <Image>
@@ -59,4 +59,4 @@ const Desc = styled.p`
   color: #aaa;
 `;
 
-export default React.memo(SubscribeItem);
+export default React.memo(SubscribeChannelItem);

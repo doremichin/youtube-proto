@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
-import VideoComments from '../components/VideoComments';
-import { getVideoComments } from '../../../redux/video/slice';
-import { ACCESS_KEY } from '../../../const/config';
-import InfiniteScroll from '../../shared/components/InfiniteScroll';
+import { getVideoComments } from '../../../../redux/video/slice';
+import { ACCESS_KEY } from '../../../../const/config';
+import InfiniteScroll from '../../../shared/components/InfiniteScroll';
+import CommentItem from '../../components/Comments/CommentItem';
 
 const CommentsContainer = ({ id, commentCount }) => {
   const dispatch = useDispatch();
@@ -29,9 +29,11 @@ const CommentsContainer = ({ id, commentCount }) => {
 
   return (
     <Container>
+      <Title>댓글 {Number(commentCount).toLocaleString()}개</Title>
       <InfiniteScroll next={next} hasMore>
-        <Title>댓글 {Number(commentCount).toLocaleString()}개</Title>
-        <VideoComments comments={comments.items} />
+        {
+          comments?.items?.map((item, index) => <CommentItem item={item} key={item.id || index} />)
+         }
       </InfiniteScroll>
     </Container>
   );
