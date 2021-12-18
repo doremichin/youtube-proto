@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { IconSearch } from '../../../../icons';
 
-const SearchBox = ({ onSubmit, onChange }) => {
+const SearchBox = ({ onSubmit, onChange, isMobile }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit();
@@ -12,7 +12,7 @@ const SearchBox = ({ onSubmit, onChange }) => {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Input onChange={onChange} placeholder="검색" />
+        <Input onChange={onChange} placeholder="검색" autoFocus={isMobile} />
         <Button>
           <IconSearch />
         </Button>
@@ -22,11 +22,13 @@ const SearchBox = ({ onSubmit, onChange }) => {
 };
 
 const Container = styled.div`
+
 `;
 const Form = styled.form`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 const Input = styled.input`
   max-width: 650px;

@@ -10,7 +10,7 @@ const SearchBoxInMobile = ({ onClick }) => (
       <IconArrowLeft />
     </Button>
     <Inner>
-      <SearchBoxContainer />
+      <SearchBoxContainer isMobile />
     </Inner>
     <Button>
       <IconMicrophone />

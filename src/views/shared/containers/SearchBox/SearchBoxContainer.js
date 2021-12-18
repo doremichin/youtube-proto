@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import SearchBox from '../../components/SearchBox';
 
-const SearchBoxContainer = () => {
+const SearchBoxContainer = ({ isMobile }) => {
   const [query, setQuery] = useState('');
   const history = useHistory();
   const onSubmit = () => {
@@ -15,7 +15,7 @@ const SearchBoxContainer = () => {
   };
   return (
     <Container>
-      <SearchBox onSubmit={onSubmit} onChange={onChange} />
+      <SearchBox onSubmit={onSubmit} onChange={onChange} isMobile />
     </Container>
   );
 };

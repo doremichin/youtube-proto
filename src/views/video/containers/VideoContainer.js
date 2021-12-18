@@ -32,22 +32,26 @@ const VideoContainer = () => {
   if (!data.items) return null;
   return (
     <Container>
-      <SectionContainer>
+      <Top>
         <VideoPlayer data={data?.items?.[0]} />
-        <VideoDetailInfoSection>
-          <VideoDetailInfo data={data?.items?.[0]} />
-          <ChannelDetailContainer />
-          {
-            !isLaptopOrDesktop
+      </Top>
+      <SectionContainer>
+        <Bottom>
+          <VideoDetailInfoSection>
+            <VideoDetailInfo data={data?.items?.[0]} />
+            <ChannelDetailContainer />
+            {
+              !isLaptopOrDesktop
               && <RelatedVideosContainer isLaptopOrDesktop={false} />
+            }
+            <CommentsContainer id={v} commentCount={data?.items?.[0].statistics.commentCount} />
+          </VideoDetailInfoSection>
+          {
+            isLaptopOrDesktop
+            && <RelatedVideosContainer isLaptopOrDesktop />
           }
-          <CommentsContainer id={v} commentCount={data?.items?.[0].statistics.commentCount} />
-        </VideoDetailInfoSection>
+        </Bottom>
       </SectionContainer>
-      {
-        isLaptopOrDesktop
-          && <RelatedVideosContainer isLaptopOrDesktop />
-      }
     </Container>
 
   );
@@ -55,11 +59,14 @@ const VideoContainer = () => {
 
 const Container = styled.div`
   margin: 20px auto 0;
-  max-width: 1700px;
-  display: flex;
 `;
 
 const VideoDetailInfoSection = styled.div`
-  
+  flex: 1;
+`;
+const Top = styled.div`
+`;
+const Bottom = styled.div`
+  display: flex;
 `;
 export default VideoContainer;
