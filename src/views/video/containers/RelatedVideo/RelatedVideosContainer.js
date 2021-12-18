@@ -84,6 +84,7 @@ const RelatedVideosContainer = ({ isLaptopOrDesktop }) => {
 };
 
 const Container = styled.div`
+  padding-top: 15px;
   flex-shrink: 0;
   width: 100%;
   &.isLaptopOrDesktop{
