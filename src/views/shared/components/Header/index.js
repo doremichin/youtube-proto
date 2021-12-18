@@ -91,7 +91,6 @@ const Left = styled.div`
 const Center = styled.div`
   margin: 0 60px;
   width: 100%;
-  
 `;
 const Right = styled.div`
 `;
