@@ -27,6 +27,7 @@ const VideoContainer = () => {
       key: ACCESS_KEY,
       id: v,
     }));
+    window.scrollTo(0, 0);
   }, [v]);
 
   if (!data.items) return null;
