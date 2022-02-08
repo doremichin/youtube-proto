@@ -13,7 +13,7 @@ const SidebarSlide = ({ isView, handleClick }) => (
   <>
     <Container className={cn({ isView })}>
       <Top>
-        <MenuButton toggle={handleClick} />
+        <MenuButton onClick={handleClick} />
 
         <Logo to="/">
           <IconLogo />

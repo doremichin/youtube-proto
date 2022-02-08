@@ -17,24 +17,31 @@ import Contain from '../Common/Contain';
 
 const Header = () => {
   const { search } = useLocation();
-  const [isView, setView] = useState(false);
-  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-  const sidebar = useSelector((state) => state.app.sidebar);
+  const isMobile = useMediaQuery({ maxWidth: 700 });
+
+  const [isView, setView] = useState(false);
+
+  const { user, sidebar } = useSelector((state) => ({
+    user: state.auth.user,
+    sidebar: state.app.sidebar,
+  }));
+
   const isViewSidebar = () => {
     dispatch(toggleSidebar(!sidebar));
   };
   const isViewSearchBox = () => {
-    setView((p) => !p);
+    setView((v) => !v);
   };
-  const isMobile = useMediaQuery({ maxWidth: 700 });
+
   useEffect(() => {
     setView(false);
   }, [search]);
+
   return (
     <Container>
       <Left>
-        <MenuButton toggle={isViewSidebar} />
+        <MenuButton onClick={isViewSidebar} />
 
         <Logo to="/">
           <IconLogo />

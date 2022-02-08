@@ -12,6 +12,7 @@ const MainContainer = () => {
   const dispatch = useDispatch();
   const { items, nextPageToken } = useSelector((state) => state.video.list);
   const videoCategoryId = useSelector((state) => state.channels.selectedCategoryId);
+
   const getVideos = () => {
     dispatch(getVideoList({
       part: 'snippet,statistics,contentDetails',
@@ -33,6 +34,7 @@ const MainContainer = () => {
       videoCategoryId,
     }));
   };
+
   useEffect(() => {
     getVideos();
   }, []);

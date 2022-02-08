@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { IconMenu } from '../../../../icons';
 
-const MenuButton = ({ toggle }) => (
-  <ButtonMenu onClick={toggle}>
+const MenuButton = ({ onClick }) => (
+  <ButtonMenu onClick={onClick}>
     <IconMenu />
   </ButtonMenu>
 );
