@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SubscribeButton from '../Button/SubscribeButton';
+import SubscribeButton from '../../../shared/components/Button/SubscribeButton';
 
 const SubscribeChannelItem = ({ item }) => (
   <Container>

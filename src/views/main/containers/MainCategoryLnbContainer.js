@@ -26,7 +26,7 @@ const MainCategoryLnbContainer = () => {
     getMainCategory();
   }, []);
   const renderItem = (item, index) => {
-    if (!item) return <NavItem key="all" onClick={() => selectCategory(0)}>전체</NavItem>;
+    if (!item) return <NavItem key={index} onClick={() => selectCategory(0)}>전체</NavItem>;
     if (item.snippet.assignable) return <NavItem key={index} onClick={() => selectCategory(item.id)}>{item.snippet.title}</NavItem>;
     return null;
   };
@@ -58,8 +58,6 @@ const NavItem = styled.div`
   transition: 0.3s;
   &:hover{
     background-color: rgba(255,255,255,0.2);
-
   }
-  
 `;
 export default MainCategoryLnbContainer;
