@@ -38,9 +38,8 @@ const SearchContainer = () => {
   if (!items) return null;
 
   const next = () => {
-    if (items.length > 0) {
-      getNextSearchResult();
-    }
+    if (items?.length === 0) return;
+    getNextSearchResult();
   };
   return (
     <Container>

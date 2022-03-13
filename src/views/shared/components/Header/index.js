@@ -33,6 +33,10 @@ const Header = () => {
   const isViewSearchBox = () => {
     setView((v) => !v);
   };
+  const userValidation = () => {
+    if (user) return <UserInfo user={user} />;
+    return <LoginButton />;
+  };
 
   useEffect(() => {
     setView(false);
@@ -68,10 +72,7 @@ const Header = () => {
             <IconSettingDot />
           </Button>
           <LoginBox>
-            {
-                    user
-                      ? <UserInfo user={user} /> : <LoginButton />
-                }
+            {userValidation()}
           </LoginBox>
         </ButtonGroup>
       </Right>

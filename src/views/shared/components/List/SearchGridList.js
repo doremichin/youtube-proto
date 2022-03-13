@@ -1,28 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchGridList = ({ data = [], searchItem = () => {}, subscribeItem = () => {} }) => (
+const SearchGridList = ({ data = [], renderItem = () => {} }) => (
   <Container>
     <Row>
       {
-                data.map((item, index) => {
-                  if (item.id.kind === 'youtube#channel') {
-                    return (
-                      <Col>
-                        {subscribeItem(item)}
-                      </Col>
-                    );
-                  }
-                  if (item.id.kind === 'youtube#video') {
-                    return (
-                      <Col>
-                        {searchItem(item)}
-                      </Col>
-                    );
-                  }
-                  return null;
-                })
-            }
+        data.map((item, index) => (
+          <Col key={index}>
+            {renderItem(item, item.id.kind)}
+          </Col>
+        ))
+      }
     </Row>
   </Container>
 );
