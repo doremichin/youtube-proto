@@ -43,9 +43,8 @@ const MainContainer = () => {
   }, [videoCategoryId]);
 
   const next = () => {
-    if (items?.length > 0) {
-      getVideos();
-    }
+    if (items?.length === 0) return;
+    getVideos();
   };
   if (!items) return null;
 

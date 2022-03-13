@@ -25,9 +25,16 @@ const MainCategoryLnbContainer = () => {
   useEffect(() => {
     getMainCategory();
   }, []);
-  const renderItem = (item, index) => {
-    if (!item) return <NavItem key={index} onClick={() => selectCategory(0)}>전체</NavItem>;
-    if (item.snippet.assignable) return <NavItem key={index} onClick={() => selectCategory(item.id)}>{item.snippet.title}</NavItem>;
+  const renderItem = (type, item, index) => {
+    switch (type) {
+      default: break;
+      case 'all':
+        return <NavItem key={index} onClick={() => selectCategory(0)}>전체</NavItem>;
+      case 'category':
+        return <NavItem key={index} onClick={() => selectCategory(item.id)}>{item.snippet.title}</NavItem>;
+    }
+    // if (!item) return <NavItem key={index} onClick={() => selectCategory(0)}>전체</NavItem>;
+    // if (item.snippet.assignable) return <NavItem key={index} onClick={() => selectCategory(item.id)}>{item.snippet.title}</NavItem>;
     return null;
   };
   if (!items) return null;

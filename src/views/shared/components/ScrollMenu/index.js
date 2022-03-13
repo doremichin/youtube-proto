@@ -36,9 +36,9 @@ const ScrollMenu = ({ data, renderItem }) => {
       }
       <Track onScroll={handleScroll} ref={trackRef}>
         <Nav>
-          {renderItem()}
+          {renderItem('all')}
           {
-            data.map((item, index) => renderItem(item, index))
+            data.map((item, index) => renderItem('category', item, index))
           }
         </Nav>
       </Track>
