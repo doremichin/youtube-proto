@@ -6,11 +6,20 @@ import SearchGridList from '../../shared/components/List/SearchGridList';
 import SearchItemContainer from '../containers/SearchItemContainer';
 
 const SearchResults = ({ data = [] }) => {
-  const searchItem = (item) => <SearchItemContainer item={item} />;
-  const subscribeItem = (item) => <SubscribeItem item={item} />;
+  const renderItem = (item, type) => {
+    switch (type) {
+      default: break;
+      case 'youtube#channel':
+        return <SubscribeItem item={item} />;
+      case 'youtube#video':
+        return <SearchItemContainer item={item} />;
+    }
+    return null;
+  };
+
   return (
     <Container>
-      <SearchGridList data={data} searchItem={searchItem} subscribeItem={subscribeItem} />
+      <SearchGridList data={data} renderItem={renderItem} />
     </Container>
   );
 };
